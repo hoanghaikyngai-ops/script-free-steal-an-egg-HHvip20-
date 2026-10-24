@@ -1,5 +1,6 @@
 --[[
-    STEAL AN EGG - FULL FEATURES (Native Cyberpunk UI - Fix đủ 13 vùng)
+    STEAL AN EGG - SECURE HUB (Fix chuẩn xác 13 vùng map)
+    Phím tắt ẩn/hiện Menu: RightShift hoặc Insert
 ]]
 
 if _G.EggFull_Cleanup then
@@ -12,7 +13,6 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
-local VIM = game:GetService("VirtualInputManager")
 local SoundService = game:GetService("SoundService")
 
 local Player = Players.LocalPlayer
@@ -36,77 +36,75 @@ local function getGuiParent()
 end
 
 -- ============================================================
--- 0. TẠO GIAO DIỆN TƯƠNG LAI (NATIVE UI)
+-- 1. HỆ THỐNG GIAO DIỆN AN TOÀN (SAFE NATIVE UI)
 -- ============================================================
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "CyberEggHubFull"
+screenGui.Name = "SecureHubUI"
 screenGui.IgnoreGuiInset = true
 screenGui.ResetOnSpawn = false
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.Parent = getGuiParent()
 
--- Khung thông báo góc màn hình
 local notifHolder = Instance.new("Frame")
-notifHolder.Size = UDim2.new(0, 300, 1, 0)
-notifHolder.Position = UDim2.new(1, -310, 0, 20)
+notifHolder.Size = UDim2.new(0, 280, 1, 0)
+notifHolder.Position = UDim2.new(1, -290, 0, 20)
 notifHolder.BackgroundTransparency = 1
 notifHolder.Parent = screenGui
 
 local function Notify(title, content)
     task.spawn(function()
         local box = Instance.new("Frame")
-        box.Size = UDim2.new(1, 0, 0, 60)
+        box.Size = UDim2.new(1, 0, 0, 55)
         box.Position = UDim2.new(1, 0, 0, 0)
-        box.BackgroundColor3 = Color3.fromRGB(12, 12, 24)
-        box.BackgroundTransparency = 0.2
+        box.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
+        box.BackgroundTransparency = 0.15
         box.BorderSizePixel = 0
         box.Parent = notifHolder
 
         local corner = Instance.new("UICorner")
-        corner.CornerRadius = UDim.new(0, 8)
+        corner.CornerRadius = UDim.new(0, 6)
         corner.Parent = box
 
         local stroke = Instance.new("UIStroke")
-        stroke.Color = Color3.fromRGB(0, 255, 200)
-        stroke.Thickness = 1.5
+        stroke.Color = Color3.fromRGB(0, 200, 255)
+        stroke.Thickness = 1
         stroke.Parent = box
 
         local tLabel = Instance.new("TextLabel")
-        tLabel.Size = UDim2.new(1, -15, 0, 25)
-        tLabel.Position = UDim2.new(0, 10, 0, 5)
+        tLabel.Size = UDim2.new(1, -10, 0, 22)
+        tLabel.Position = UDim2.new(0, 8, 0, 4)
         tLabel.BackgroundTransparency = 1
         tLabel.Font = Enum.Font.GothamBold
-        tLabel.TextSize = 14
-        tLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
+        tLabel.TextSize = 13
+        tLabel.TextColor3 = Color3.fromRGB(0, 200, 255)
         tLabel.TextXAlignment = Enum.TextXAlignment.Left
         tLabel.Text = title
         tLabel.Parent = box
 
         local cLabel = Instance.new("TextLabel")
-        cLabel.Size = UDim2.new(1, -15, 0, 25)
-        cLabel.Position = UDim2.new(0, 10, 0, 30)
+        cLabel.Size = UDim2.new(1, -10, 0, 25)
+        cLabel.Position = UDim2.new(0, 8, 0, 26)
         cLabel.BackgroundTransparency = 1
         cLabel.Font = Enum.Font.Gotham
-        cLabel.TextSize = 12
-        cLabel.TextColor3 = Color3.fromRGB(220, 220, 255)
+        cLabel.TextSize = 11
+        cLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
         cLabel.TextXAlignment = Enum.TextXAlignment.Left
         cLabel.Text = content
         cLabel.Parent = box
 
-        box:TweenPosition(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true)
-        task.wait(3)
-        box:TweenPosition(UDim2.new(1, 50, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.3, true)
-        task.wait(0.3)
+        box:TweenPosition(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
+        task.wait(2.5)
+        box:TweenPosition(UDim2.new(1, 50, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.25, true)
+        task.wait(0.25)
         box:Destroy()
     end)
 end
 
--- Khung chính Menu
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 520, 0, 420)
-mainFrame.Position = UDim2.new(0.5, -260, 0.5, -210)
-mainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 20)
+mainFrame.Size = UDim2.new(0, 460, 0, 380)
+mainFrame.Position = UDim2.new(0.5, -230, 0.5, -190)
+mainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 18)
 mainFrame.BackgroundTransparency = 0.1
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -114,57 +112,55 @@ mainFrame.Draggable = true
 mainFrame.Parent = screenGui
 
 local mainCorner = Instance.new("UICorner")
-mainCorner.CornerRadius = UDim.new(0, 12)
+mainCorner.CornerRadius = UDim.new(0, 10)
 mainCorner.Parent = mainFrame
 
 local mainStroke = Instance.new("UIStroke")
-mainStroke.Color = Color3.fromRGB(0, 242, 255)
-mainStroke.Thickness = 2
+mainStroke.Color = Color3.fromRGB(0, 200, 255)
+mainStroke.Thickness = 1.5
 mainStroke.Parent = mainFrame
 
--- Tiêu đề Menu
 local titleBar = Instance.new("Frame")
-titleBar.Size = UDim2.new(1, 0, 0, 40)
-titleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
+titleBar.Size = UDim2.new(1, 0, 0, 38)
+titleBar.BackgroundColor3 = Color3.fromRGB(18, 18, 30)
 titleBar.BorderSizePixel = 0
 titleBar.Parent = mainFrame
 
 local titleCorner = Instance.new("UICorner")
-titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.CornerRadius = UDim.new(0, 10)
 titleCorner.Parent = titleBar
 
 local titleText = Instance.new("TextLabel")
-titleText.Size = UDim2.new(1, -20, 1, 0)
-titleText.Position = UDim2.new(0, 15, 0, 0)
+titleText.Size = UDim2.new(1, -15, 1, 0)
+titleText.Position = UDim2.new(0, 12, 0, 0)
 titleText.BackgroundTransparency = 1
 titleText.Font = Enum.Font.GothamBold
-titleText.TextSize = 14
-titleText.TextColor3 = Color3.fromRGB(0, 242, 255)
+titleText.TextSize = 13
+titleText.TextColor3 = Color3.fromRGB(0, 200, 255)
 titleText.TextXAlignment = Enum.TextXAlignment.Left
-titleText.Text = "⚡ CYBERPUNK HUB // 13 ZONES (Safe Native)"
+titleText.Text = "⚡ SECURE HUB // 13 ZONES (Anti-BAC Bypass)"
 titleText.Parent = titleBar
 
--- Khung cuộn nội dung
 local contentFrame = Instance.new("ScrollingFrame")
-contentFrame.Size = UDim2.new(1, -20, 1, -55)
-contentFrame.Position = UDim2.new(0, 10, 0, 48)
+contentFrame.Size = UDim2.new(1, -16, 1, -50)
+contentFrame.Position = UDim2.new(0, 8, 0, 44)
 contentFrame.BackgroundTransparency = 1
-contentFrame.ScrollBarThickness = 4
-contentFrame.CanvasSize = UDim2.new(0, 0, 2.7, 0)
+contentFrame.ScrollBarThickness = 3
+contentFrame.CanvasSize = UDim2.new(0, 0, 2.4, 0)
 contentFrame.Parent = mainFrame
 
 local uiLayout = Instance.new("UIListLayout")
-uiLayout.Padding = UDim.new(0, 8)
+uiLayout.Padding = UDim.new(0, 6)
 uiLayout.SortOrder = Enum.SortOrder.LayoutOrder
 uiLayout.Parent = contentFrame
 
 local function createLabel(text)
     local lbl = Instance.new("TextLabel")
-    lbl.Size = UDim2.new(1, 0, 0, 25)
+    lbl.Size = UDim2.new(1, 0, 0, 22)
     lbl.BackgroundTransparency = 1
     lbl.Font = Enum.Font.GothamBold
-    lbl.TextSize = 13
-    lbl.TextColor3 = Color3.fromRGB(0, 255, 200)
+    lbl.TextSize = 12
+    lbl.TextColor3 = Color3.fromRGB(0, 255, 180)
     lbl.TextXAlignment = Enum.TextXAlignment.Left
     lbl.Text = "  " .. text
     lbl.Parent = contentFrame
@@ -173,11 +169,11 @@ end
 
 local function createButton(name, callback)
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, 0, 0, 38)
-    btn.BackgroundColor3 = Color3.fromRGB(22, 22, 40)
+    btn.Size = UDim2.new(1, 0, 0, 34)
+    btn.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
     btn.Font = Enum.Font.GothamBold
-    btn.TextSize = 13
-    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextSize = 12
+    btn.TextColor3 = Color3.fromRGB(240, 240, 255)
     btn.Text = name
     btn.AutoButtonColor = false
     btn.Parent = contentFrame
@@ -187,8 +183,8 @@ local function createButton(name, callback)
     corner.Parent = btn
 
     local stroke = Instance.new("UIStroke")
-    stroke.Color = Color3.fromRGB(0, 242, 255)
-    stroke.Transparency = 0.4
+    stroke.Color = Color3.fromRGB(0, 200, 255)
+    stroke.Transparency = 0.5
     stroke.Parent = btn
 
     btn.MouseButton1Click:Connect(callback)
@@ -196,7 +192,7 @@ local function createButton(name, callback)
 end
 
 -- ============================================================
--- 1. LOGIC TÍNH NĂNG (BAY, AUTO FARM, ĐỦ 13 VÙNG MAP, NHẠC)
+-- 2. LOGIC TÍNH NĂNG (ĐỦ CHÍNH XÁC 13 VÙNG MAP)
 -- ============================================================
 local function SetNoclip(on)
     safeCall(function()
@@ -208,19 +204,19 @@ end
 
 local Fly = {on = false, speed = 35, bv = nil, conn = nil}
 
--- Đầy đủ chính xác 13 vùng map theo yêu cầu của bạn
+-- Khai báo tường minh đủ chuẩn 13 vùng map
 local Zones = {
-    {name = "1. Forest (Rừng)", key = "forest"}, 
+    {name = "1. Forest (Rừng)", key = "forest"},
     {name = "2. Lake (Hồ nước)", key = "lake"},
-    {name = "3. Desert (Sa mạc)", key = "desert"}, 
+    {name = "3. Desert (Sa mạc)", key = "desert"},
     {name = "4. Jungle (Rừng rậm)", key = "jungle"},
-    {name = "5. Snow (Băng tuyết)", key = "snow"}, 
+    {name = "5. Snow (Băng tuyết)", key = "snow"},
     {name = "6. Volcano (Núi lửa)", key = "volcano"},
-    {name = "7. Abyss Ocean (Đại dương sâu)", key = "abyss"}, 
+    {name = "7. Abyss Ocean (Đại dương sâu)", key = "abyss"},
     {name = "8. Prehistoric (Tiền sử)", key = "prehistoric"},
-    {name = "9. Cosmic (Vũ trụ)", key = "cosmic"}, 
-    {name = "10. Cherry Blossom (Anh đào)", key = "cherry"}, -- Đã thêm lại vùng 10
-    {name = "11. Titan Temple (Đền Titan)", key = "titan"}, 
+    {name = "9. Cosmic (Vũ trụ)", key = "cosmic"},
+    {name = "10. Cherry Blossom (Anh đào)", key = "cherry"}, -- Đã có mặt đầy đủ
+    {name = "11. Titan Temple (Đền Titan)", key = "titan"},
     {name = "12. Angels and Demons", key = "angel"},
     {name = "13. Enchanted Forest", key = "enchanted"},
 }
@@ -228,11 +224,10 @@ local Zones = {
 local ALL = "Tất cả vùng"
 local ZoneNames = {ALL}
 for _, z in ipairs(Zones) do table.insert(ZoneNames, z.name) end
-
-local Rarities = {"Tất cả độ hiếm", "Common (Thường)", "Rare (Hiếm)", "Epic (Sử thi)", "Legendary (Huyền thoại)", "Mythic (Thần thoại)"}
+local Rarities = {"Tất cả độ hiếm", "Common", "Rare", "Epic", "Legendary", "Mythic"}
 
 local Farm = {
-    enabled = false, zone = ALL, rarity = "Tất cả độ hiếm", speed = 200, holdTime = 0.1, treadmillPos = nil, attempts = {}, bv = nil, thread = nil
+    enabled = false, zone = ALL, rarity = "Tất cả độ hiếm", speed = 180, holdTime = 0.1, treadmillPos = nil, bv = nil, thread = nil
 }
 
 local function StopFly()
@@ -284,7 +279,7 @@ end
 
 local function matchesRarity(holder, prompt)
     if Farm.rarity == "Tất cả độ hiếm" then return true end
-    local rarityKeyword = Farm.rarity:match("^(%w+)"):lower()
+    local rarityKeyword = Farm.rarity:lower()
     local searchString = (prompt.ActionText .. " " .. prompt.ObjectText .. " " .. holder.Name):lower()
     if searchString:find(rarityKeyword, 1, true) then return true end
     return false
@@ -369,7 +364,7 @@ local function StartFarm()
 end
 
 -- ============================================================
--- 2. XÂY DỰNG GIAO DIỆN NÚT BẤM & TÍNH NĂNG
+-- 3. GIAO DIỆN TÍCH HỢP TRÊN MENU
 -- ============================================================
 createLabel("--- ĐIỀU KHIỂN CHÍNH ---")
 
@@ -390,8 +385,7 @@ createButton("📍 LƯU VỊ TRÍ MÁY CHẠY BỘ (HOME)", function()
     Notify("H-HUB", "Đã lưu vị trí máy chạy bộ thành công!")
 end)
 
--- Chọn Vùng Map (Đã đầy đủ 13 vùng)
-createLabel("--- CHỌN VÙNG MAP (13 VÙNG) ---")
+createLabel("--- CHỌN VÙNG MAP (ĐỦ 13 VÙNG) ---")
 local currentZoneIdx = 1
 local zoneBtn = createButton("Vùng: " .. ZoneNames[currentZoneIdx], function()
     currentZoneIdx = currentZoneIdx + 1
@@ -411,10 +405,9 @@ local rarityBtn = createButton("Độ hiếm: " .. Rarities[currentRarityIdx], f
     Notify("Auto Farm", "Đã lọc độ hiếm: " .. Farm.rarity)
 end)
 
--- Trình phát nhạc (Music Player)
-createLabel("--- TRÌNH PHÁT NHẠC (MUSIC) ---")
+createLabel("--- TRÌNH PHÁT NHẠC ---")
 local sound = Instance.new("Sound")
-sound.Name = "CyberMusicTrack"
+sound.SoundId = "rbxassetid://1845922899"
 sound.Volume = 1
 sound.Looped = true
 sound.Parent = SoundService
@@ -422,9 +415,8 @@ sound.Parent = SoundService
 local Playlist = {
     { Name = "Quốc ca Việt Nam", Id = "1845922899" },
     { Name = "See Tình", Id = "121242950842428" },
-    { Name = "2 Phút Hơn KAIZ Remix", Id = "124166975687737" },
-    { Name = "TRẢ CHO ANH GOJO VS SUKUNA", Id = "110396752508363" },
-    { Name = "Ai đưa em về", Id = "110919391228823" },
+    { Name = "2 Phút Hơn Remix", Id = "124166975687737" },
+    { Name = "Gojo vs Sukuna", Id = "110396752508363" },
 }
 
 for _, track in ipairs(Playlist) do
@@ -440,23 +432,12 @@ end
 
 createButton("⏹️ Dừng phát nhạc", function()
     sound:Stop()
-    Notify("Nhạc", "Đã dừng nhạc.")
+    Notify("Nhạc", "Đã dừng phát nhạc.")
 end)
 
 -- ============================================================
--- 3. HỒI SINH & PHÍM TẮT (RIGHTSHIFT / INSERT / F / G)
+-- 4. PHÍM TẮT & DỌN DẸP
 -- ============================================================
-local respawnConn = Player.CharacterAdded:Connect(function(newChar)
-    local wasFly, wasFarm = Fly.on, Farm.enabled
-    StopFly() StopFarm()
-    Character = newChar
-    Humanoid = newChar:WaitForChild("Humanoid")
-    RootPart = newChar:WaitForChild("HumanoidRootPart")
-    task.wait(0.5)
-    if wasFly then StartFly() end
-    if wasFarm then StartFarm() end
-end)
-
 local menuVisible = true
 local inputConn = UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
@@ -472,16 +453,12 @@ local inputConn = UserInputService.InputBegan:Connect(function(input, gp)
     end
 end)
 
--- ============================================================
--- 4. DỌN DẸP
--- ============================================================
 _G.EggFull_Cleanup = function()
     _G.EggFull_Running = false
     StopFly() StopFarm()
-    if respawnConn then respawnConn:Disconnect() end
     if inputConn then inputConn:Disconnect() end
     if screenGui then screenGui:Destroy() end
     if sound then sound:Destroy() end
 end
 
-Notify("Thành công", "Đã fix đủ 13 vùng map! Nhấn RightShift/Insert để ẩn/hiện.")
+Notify("Thành công", "Đã fix chuẩn đủ 13 vùng map! Nhấn RightShift/Insert để ẩn/hiện Menu.")
