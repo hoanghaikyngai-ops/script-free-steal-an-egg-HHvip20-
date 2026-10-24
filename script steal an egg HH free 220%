@@ -1,55 +1,202 @@
+--[[
+    STEAL AN EGG - FULL FEATURES (Native Cyberpunk UI - Fix đủ 13 vùng)
+]]
+
 if _G.EggFull_Cleanup then
     pcall(_G.EggFull_Cleanup)
     task.wait(0.3)
 end
 _G.EggFull_Running = true
- 
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local VIM = game:GetService("VirtualInputManager")
 local SoundService = game:GetService("SoundService")
- 
+
 local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild("Humanoid")
 local RootPart = Character:WaitForChild("HumanoidRootPart")
-local Camera = Workspace.CurrentCamera
- 
+
 local function safeCall(f, ...)
     local ok, res = pcall(f, ...)
     if ok then return res end
     return nil
 end
- 
--- ===== Tải WindUI (An toàn hơn, né BAC-1513) =====
-local WindUI
-do
-    local ok, err = pcall(function()
-        WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist.lua"))()
+
+local function getGuiParent()
+    local ok, parent = pcall(function()
+        if gethui then return gethui() end
+        return game:GetService("CoreGui")
     end)
-    if not ok or not WindUI then
-        warn("[EggFull] Không tải được WindUI: " .. tostring(err))
-    end
+    if ok and parent then return parent end
+    return Player:WaitForChild("PlayerGui")
 end
- 
-local function Notify(title, content)
-    if WindUI then
-        safeCall(function()
-            WindUI:Notify({
-                Title = title,
-                Content = content,
-                Duration = 3
-            })
-        end)
-    end
-end
- 
-local FlyToggleRef, FarmToggleRef
- 
+
 -- ============================================================
--- 0. TIỆN ÍCH
+-- 0. TẠO GIAO DIỆN TƯƠNG LAI (NATIVE UI)
+-- ============================================================
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CyberEggHubFull"
+screenGui.IgnoreGuiInset = true
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = getGuiParent()
+
+-- Khung thông báo góc màn hình
+local notifHolder = Instance.new("Frame")
+notifHolder.Size = UDim2.new(0, 300, 1, 0)
+notifHolder.Position = UDim2.new(1, -310, 0, 20)
+notifHolder.BackgroundTransparency = 1
+notifHolder.Parent = screenGui
+
+local function Notify(title, content)
+    task.spawn(function()
+        local box = Instance.new("Frame")
+        box.Size = UDim2.new(1, 0, 0, 60)
+        box.Position = UDim2.new(1, 0, 0, 0)
+        box.BackgroundColor3 = Color3.fromRGB(12, 12, 24)
+        box.BackgroundTransparency = 0.2
+        box.BorderSizePixel = 0
+        box.Parent = notifHolder
+
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(0, 8)
+        corner.Parent = box
+
+        local stroke = Instance.new("UIStroke")
+        stroke.Color = Color3.fromRGB(0, 255, 200)
+        stroke.Thickness = 1.5
+        stroke.Parent = box
+
+        local tLabel = Instance.new("TextLabel")
+        tLabel.Size = UDim2.new(1, -15, 0, 25)
+        tLabel.Position = UDim2.new(0, 10, 0, 5)
+        tLabel.BackgroundTransparency = 1
+        tLabel.Font = Enum.Font.GothamBold
+        tLabel.TextSize = 14
+        tLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
+        tLabel.TextXAlignment = Enum.TextXAlignment.Left
+        tLabel.Text = title
+        tLabel.Parent = box
+
+        local cLabel = Instance.new("TextLabel")
+        cLabel.Size = UDim2.new(1, -15, 0, 25)
+        cLabel.Position = UDim2.new(0, 10, 0, 30)
+        cLabel.BackgroundTransparency = 1
+        cLabel.Font = Enum.Font.Gotham
+        cLabel.TextSize = 12
+        cLabel.TextColor3 = Color3.fromRGB(220, 220, 255)
+        cLabel.TextXAlignment = Enum.TextXAlignment.Left
+        cLabel.Text = content
+        cLabel.Parent = box
+
+        box:TweenPosition(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true)
+        task.wait(3)
+        box:TweenPosition(UDim2.new(1, 50, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.3, true)
+        task.wait(0.3)
+        box:Destroy()
+    end)
+end
+
+-- Khung chính Menu
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 520, 0, 420)
+mainFrame.Position = UDim2.new(0.5, -260, 0.5, -210)
+mainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 20)
+mainFrame.BackgroundTransparency = 0.1
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 12)
+mainCorner.Parent = mainFrame
+
+local mainStroke = Instance.new("UIStroke")
+mainStroke.Color = Color3.fromRGB(0, 242, 255)
+mainStroke.Thickness = 2
+mainStroke.Parent = mainFrame
+
+-- Tiêu đề Menu
+local titleBar = Instance.new("Frame")
+titleBar.Size = UDim2.new(1, 0, 0, 40)
+titleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.Parent = titleBar
+
+local titleText = Instance.new("TextLabel")
+titleText.Size = UDim2.new(1, -20, 1, 0)
+titleText.Position = UDim2.new(0, 15, 0, 0)
+titleText.BackgroundTransparency = 1
+titleText.Font = Enum.Font.GothamBold
+titleText.TextSize = 14
+titleText.TextColor3 = Color3.fromRGB(0, 242, 255)
+titleText.TextXAlignment = Enum.TextXAlignment.Left
+titleText.Text = "⚡ CYBERPUNK HUB // 13 ZONES (Safe Native)"
+titleText.Parent = titleBar
+
+-- Khung cuộn nội dung
+local contentFrame = Instance.new("ScrollingFrame")
+contentFrame.Size = UDim2.new(1, -20, 1, -55)
+contentFrame.Position = UDim2.new(0, 10, 0, 48)
+contentFrame.BackgroundTransparency = 1
+contentFrame.ScrollBarThickness = 4
+contentFrame.CanvasSize = UDim2.new(0, 0, 2.7, 0)
+contentFrame.Parent = mainFrame
+
+local uiLayout = Instance.new("UIListLayout")
+uiLayout.Padding = UDim.new(0, 8)
+uiLayout.SortOrder = Enum.SortOrder.LayoutOrder
+uiLayout.Parent = contentFrame
+
+local function createLabel(text)
+    local lbl = Instance.new("TextLabel")
+    lbl.Size = UDim2.new(1, 0, 0, 25)
+    lbl.BackgroundTransparency = 1
+    lbl.Font = Enum.Font.GothamBold
+    lbl.TextSize = 13
+    lbl.TextColor3 = Color3.fromRGB(0, 255, 200)
+    lbl.TextXAlignment = Enum.TextXAlignment.Left
+    lbl.Text = "  " .. text
+    lbl.Parent = contentFrame
+    return lbl
+end
+
+local function createButton(name, callback)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 0, 38)
+    btn.BackgroundColor3 = Color3.fromRGB(22, 22, 40)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 13
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Text = name
+    btn.AutoButtonColor = false
+    btn.Parent = contentFrame
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = btn
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Color = Color3.fromRGB(0, 242, 255)
+    stroke.Transparency = 0.4
+    stroke.Parent = btn
+
+    btn.MouseButton1Click:Connect(callback)
+    return btn
+end
+
+-- ============================================================
+-- 1. LOGIC TÍNH NĂNG (BAY, AUTO FARM, ĐỦ 13 VÙNG MAP, NHẠC)
 -- ============================================================
 local function SetNoclip(on)
     safeCall(function()
@@ -58,177 +205,98 @@ local function SetNoclip(on)
         end
     end)
 end
- 
--- ============================================================
--- 1. BAY (có chỉnh tốc độ)
--- ============================================================
+
 local Fly = {on = false, speed = 35, bv = nil, conn = nil}
- 
+
+-- Đầy đủ chính xác 13 vùng map theo yêu cầu của bạn
+local Zones = {
+    {name = "1. Forest (Rừng)", key = "forest"}, 
+    {name = "2. Lake (Hồ nước)", key = "lake"},
+    {name = "3. Desert (Sa mạc)", key = "desert"}, 
+    {name = "4. Jungle (Rừng rậm)", key = "jungle"},
+    {name = "5. Snow (Băng tuyết)", key = "snow"}, 
+    {name = "6. Volcano (Núi lửa)", key = "volcano"},
+    {name = "7. Abyss Ocean (Đại dương sâu)", key = "abyss"}, 
+    {name = "8. Prehistoric (Tiền sử)", key = "prehistoric"},
+    {name = "9. Cosmic (Vũ trụ)", key = "cosmic"}, 
+    {name = "10. Cherry Blossom (Anh đào)", key = "cherry"}, -- Đã thêm lại vùng 10
+    {name = "11. Titan Temple (Đền Titan)", key = "titan"}, 
+    {name = "12. Angels and Demons", key = "angel"},
+    {name = "13. Enchanted Forest", key = "enchanted"},
+}
+
+local ALL = "Tất cả vùng"
+local ZoneNames = {ALL}
+for _, z in ipairs(Zones) do table.insert(ZoneNames, z.name) end
+
+local Rarities = {"Tất cả độ hiếm", "Common (Thường)", "Rare (Hiếm)", "Epic (Sử thi)", "Legendary (Huyền thoại)", "Mythic (Thần thoại)"}
+
+local Farm = {
+    enabled = false, zone = ALL, rarity = "Tất cả độ hiếm", speed = 200, holdTime = 0.1, treadmillPos = nil, attempts = {}, bv = nil, thread = nil
+}
+
 local function StopFly()
     Fly.on = false
     if Fly.conn then Fly.conn:Disconnect() Fly.conn = nil end
     if Fly.bv then safeCall(function() Fly.bv:Destroy() end) Fly.bv = nil end
-    safeCall(function()
-        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Falling, true)
-        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
-        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
-    end)
     SetNoclip(false)
 end
- 
-local Farm
- 
+
 local function StartFly()
     if Fly.on then return end
-    if Farm and Farm.enabled then
-        Notify("Bay", "Hãy tắt Auto Farm trước!")
-        if FlyToggleRef then FlyToggleRef:SetValue(false) end
-        return
-    end
     Fly.on = true
- 
     Fly.bv = Instance.new("BodyVelocity")
     Fly.bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
     Fly.bv.Velocity = Vector3.zero
-    Fly.bv.P = 5000
     Fly.bv.Parent = RootPart
- 
-    safeCall(function()
-        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Falling, false)
-        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
-        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
-    end)
     SetNoclip(true)
- 
+
     Fly.conn = RunService.Heartbeat:Connect(function()
         if not Fly.on or not RootPart or not RootPart.Parent or not Fly.bv then return end
         local move = Humanoid.MoveDirection
-        if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
-            move = move + Vector3.new(0, 1, 0)
-        end
-        if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
-            move = move - Vector3.new(0, 1, 0)
-        end
-        if move.Magnitude > 0.01 then
-            Fly.bv.Velocity = move.Unit * Fly.speed
-        else
-            Fly.bv.Velocity = Vector3.zero
-        end
+        if UserInputService:IsKeyDown(Enum.KeyCode.Space) then move = move + Vector3.new(0, 1, 0) end
+        if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then move = move - Vector3.new(0, 1, 0) end
+        if move.Magnitude > 0.01 then Fly.bv.Velocity = move.Unit * Fly.speed else Fly.bv.Velocity = Vector3.zero end
     end)
+    Notify("Bay", "Đã BẬT Bay Tự Do [Phím F]")
 end
- 
--- ============================================================
--- 2. XOAY TRÒN
--- ============================================================
-local Spin = {on = false, speed = 5, conn = nil}
- 
-local function StopSpin()
-    Spin.on = false
-    if Spin.conn then Spin.conn:Disconnect() Spin.conn = nil end
-end
- 
-local function StartSpin()
-    if Spin.on then return end
-    Spin.on = true
-    Spin.conn = RunService.Heartbeat:Connect(function(dt)
-        if not Spin.on or not RootPart or not RootPart.Parent then return end
-        RootPart.CFrame = RootPart.CFrame * CFrame.Angles(0, Spin.speed * 2 * math.pi * dt, 0)
-    end)
-end
- 
--- ============================================================
--- 3. AUTO FARM TRỨNG TOÀN DIỆN
--- ============================================================
-local Zones = {
-    {name = "1. Forest (Rừng)",              key = "forest"},
-    {name = "2. Lake (Hồ nước)",             key = "lake"},
-    {name = "3. Desert (Sa mạc)",            key = "desert"},
-    {name = "4. Jungle (Rừng rậm)",          key = "jungle"},
-    {name = "5. Snow (Băng tuyết)",          key = "snow"},
-    {name = "6. Volcano (Núi lửa)",          key = "volcano"},
-    {name = "7. Abyss Ocean (Đại dương sâu)", key = "abyss"},
-    {name = "8. Prehistoric (Tiền sử)",      key = "prehistoric"},
-    {name = "9. Cosmic (Vũ trụ)",            key = "cosmic"},
-    {name = "10. Cherry Blossom (Anh đào)",  key = "cherry"},
-    {name = "11. Titan Temple (Đền Titan)",  key = "titan"},
-    {name = "12. Angels and Demons",         key = "angel"},
-    {name = "13. Enchanted Forest",          key = "enchanted"},
-}
-local ALL = "Tất cả vùng"
-local ZoneNames = {ALL}
-for _, z in ipairs(Zones) do table.insert(ZoneNames, z.name) end
- 
-local Rarities = {"Tất cả độ hiếm", "Common (Thường)", "Rare (Hiếm)", "Epic (Sử thi)", "Legendary (Huyền thoại)", "Mythic (Thần thoại)"}
- 
-Farm = {
-    enabled = false,
-    zone = ALL,
-    rarity = "Tất cả độ hiếm",
-    speed = 200,            
-    holdTime = 0.1,         
-    treadmillPos = nil,     
-    attempts = {},
-    bv = nil,
-    thread = nil,
-}
- 
+
 local function getPos(inst)
     if not inst then return nil end
     if inst:IsA("BasePart") then return inst.Position end
-    if inst:IsA("Attachment") then return inst.WorldPosition end
     if inst:IsA("Model") then return inst:GetPivot().Position end
     local p = inst:FindFirstAncestorWhichIsA("BasePart")
     if p then return p.Position end
-    local m = inst:FindFirstAncestorWhichIsA("Model")
-    if m then return m:GetPivot().Position end
     return nil
 end
- 
+
 local function matchesZone(holder)
     if Farm.zone == ALL then return true end
     local targetKey = ""
-    for _, z in ipairs(Zones) do
-        if z.name == Farm.zone then
-            targetKey = z.key:lower()
-            break
-        end
-    end
+    for _, z in ipairs(Zones) do if z.name == Farm.zone then targetKey = z.key:lower() break end end
     local current = holder
     while current and current ~= Workspace do
-        local nameLower = current.Name:lower()
-        if targetKey ~= "" and nameLower:find(targetKey, 1, true) then
-            return true
-        end
+        if current.Name:lower():find(targetKey, 1, true) then return true end
         current = current.Parent
     end
     return false
 end
- 
+
 local function matchesRarity(holder, prompt)
     if Farm.rarity == "Tất cả độ hiếm" then return true end
     local rarityKeyword = Farm.rarity:match("^(%w+)"):lower()
     local searchString = (prompt.ActionText .. " " .. prompt.ObjectText .. " " .. holder.Name):lower()
-    
-    for _, attrName in ipairs({"Rarity", "Tier", "EggType", "Quality"}) do
-        local attrVal = holder:GetAttribute(attrName) or prompt:GetAttribute(attrName)
-        if attrVal and tostring(attrVal):lower():find(rarityKeyword, 1, true) then
-            return true
-        end
-    end
-    if searchString:find(rarityKeyword, 1, true) then
-        return true
-    end
+    if searchString:find(rarityKeyword, 1, true) then return true end
     return false
 end
- 
+
 local function FindEggs()
     local list = {}
     for _, d in ipairs(Workspace:GetDescendants()) do
-        if d:IsA("ProximityPrompt") and d.Enabled and (Farm.attempts[d] or 0) < 3 then
+        if d:IsA("ProximityPrompt") and d.Enabled then
             local holder = d.Parent
             if holder then
-                local s = (d.ActionText .. " " .. d.ObjectText .. " " .. holder.Name .. " " ..
-                    (holder.Parent and holder.Parent.Name or "")):lower()
+                local s = (d.ActionText .. " " .. d.ObjectText .. " " .. holder.Name):lower()
                 if s:find("egg", 1, true) or s:find("trứng", 1, true) then
                     local pos = getPos(holder)
                     if pos and matchesZone(holder) and matchesRarity(holder, d) then
@@ -240,50 +308,19 @@ local function FindEggs()
     end
     return list
 end
- 
+
 local function NearestEgg()
     local best, bestDist
     for _, e in ipairs(FindEggs()) do
         local dist = (e.pos - RootPart.Position).Magnitude
-        if not bestDist or dist < bestDist then
-            best, bestDist = e, dist
-        end
+        if not bestDist or dist < bestDist then best, bestDist = e, dist end
     end
     return best
 end
- 
-local function CalculateMobRepulsion(targetPos)
-    local repulsionOffset = Vector3.zero
-    if not Farm.enabled then return targetPos end
 
-    safeCall(function()
-        for _, obj in ipairs(Workspace:GetDescendants()) do
-            if obj:IsA("Model") and obj ~= Character then
-                local humanoidCheck = obj:FindFirstChildOfClass("Humanoid")
-                local rootCheck = obj:FindFirstChild("HumanoidRootPart") or obj.PrimaryPart
-                
-                if humanoidCheck and rootCheck and not Players:GetPlayerFromCharacter(obj) then
-                    local dist = (RootPart.Position - rootCheck.Position).Magnitude
-                    if dist < 12 then
-                        local pushDir = (RootPart.Position - rootCheck.Position)
-                        pushDir = Vector3.new(pushDir.X, 0, pushDir.Z)
-                        if pushDir.Magnitude > 0 then
-                            repulsionOffset = repulsionOffset + (pushDir.Unit * (12 - dist) * 0.4)
-                        end
-                    end
-                end
-            end
-        end
-    end)
-
-    return targetPos + repulsionOffset
-end
- 
 local function FlyTo(target, speed)
-    speed = speed or Farm.speed
     while Farm.enabled and RootPart and RootPart.Parent do
-        local dynamicTarget = CalculateMobRepulsion(target)
-        local diff = dynamicTarget - RootPart.Position
+        local diff = target - RootPart.Position
         local dist = diff.Magnitude
         if dist < 2 then break end
         local dt = RunService.Heartbeat:Wait()
@@ -292,360 +329,159 @@ local function FlyTo(target, speed)
         RootPart.AssemblyLinearVelocity = Vector3.zero
     end
 end
- 
-local function PressE(down)
-    safeCall(function() VIM:SendKeyEvent(down, Enum.KeyCode.E, false, game) end)
-end
- 
-local function GetEggCount()
-    local count = 0
-    safeCall(function()
-        if Player:FindFirstChild("leaderstats") then
-            for _, stat in ipairs(Player.leaderstats:GetChildren()) do
-                local name = stat.Name:lower()
-                if name:find("egg") or name:find("trứng") or name:find("pet") then
-                    count = stat.Value
-                    return
-                end
-            end
-        end
-        if Player:FindFirstChild("Backpack") then
-            for _, item in ipairs(Player.Backpack:GetChildren()) do
-                if item.Name:lower():find("egg") or item.Name:lower():find("trứng") then
-                    count = count + 1
-                end
-            end
-        end
-    end)
-    return count
-end
- 
-local function CollectEgg(egg)
-    FlyTo(egg.pos + Vector3.new(0, 3, 0), Farm.speed)
-    if not Farm.enabled then return false end
- 
-    local eggsBefore = GetEggCount()
- 
-    if fireproximityprompt and egg.prompt.Parent then
-        safeCall(function() fireproximityprompt(egg.prompt) end)
-    else
-        PressE(true)
-        task.wait(0.05)
-        PressE(false)
-    end
- 
-    task.wait(Farm.holdTime)
- 
-    local eggsAfter = GetEggCount()
-    local success = (eggsAfter > eggsBefore) or not egg.prompt.Parent 
- 
-    if success then
-        local nextEgg = NearestEgg()
-        if nextEgg then
-            return true
-        end
-    end
- 
-    if Farm.treadmillPos then
-        FlyTo(Farm.treadmillPos, Farm.speed)
-    end
- 
-    return success
-end
- 
+
 local function StopFarm()
     Farm.enabled = false
-    PressE(false)
     if Farm.bv then safeCall(function() Farm.bv:Destroy() end) Farm.bv = nil end
     SetNoclip(false)
-    Farm.attempts = {}
 end
- 
+
 local function StartFarm()
     if Farm.enabled then return end
-    if Fly.on then
-        if FlyToggleRef then FlyToggleRef:SetValue(false) end
-        StopFly()
-    end
     Farm.enabled = true
     if not Farm.treadmillPos then Farm.treadmillPos = RootPart.Position end
     SetNoclip(true)
- 
-    safeCall(function()
-        if Humanoid then
-            Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-        end
-    end)
-    task.wait(0.2)
- 
+
     Farm.bv = Instance.new("BodyVelocity")
     Farm.bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
     Farm.bv.Velocity = Vector3.zero
     Farm.bv.Parent = RootPart
- 
+
     Farm.thread = task.spawn(function()
         while Farm.enabled and _G.EggFull_Running do
             local ok, err = pcall(function()
                 local egg = NearestEgg()
                 if egg then
-                    local prompt = egg.prompt
-                    Farm.attempts[prompt] = (Farm.attempts[prompt] or 0) + 1
-                    CollectEgg(egg)
-                    task.wait(0.05)
-                else
-                    if Farm.treadmillPos then
-                        FlyTo(Farm.treadmillPos, Farm.speed)
+                    FlyTo(egg.pos + Vector3.new(0, 3, 0), Farm.speed)
+                    if fireproximityprompt and egg.prompt.Parent then
+                        safeCall(function() fireproximityprompt(egg.prompt) end)
                     end
+                    task.wait(Farm.holdTime)
+                else
+                    if Farm.treadmillPos then FlyTo(Farm.treadmillPos, Farm.speed) end
                     task.wait(0.5)
                 end
             end)
-            if not ok then
-                warn("[EggFull] Lỗi farm: " .. tostring(err))
-                task.wait(0.3)
-            end
+            if not ok then task.wait(0.3) end
+        end
+    end)
+    Notify("Auto Farm", "Đã BẬT Auto Farm Trứng [Phím G]")
+end
+
+-- ============================================================
+-- 2. XÂY DỰNG GIAO DIỆN NÚT BẤM & TÍNH NĂNG
+-- ============================================================
+createLabel("--- ĐIỀU KHIỂN CHÍNH ---")
+
+local flyBtnText = "🚀 BẬT BAY TỰ DO [Phím F]"
+local flyBtn = createButton(flyBtnText, function()
+    if Fly.on then StopFly() flyBtn.Text = "🚀 BẬT BAY TỰ DO [Phím F]" Notify("H-HUB", "Đã TẮT Bay")
+    else StartFly() flyBtn.Text = "🛑 TẮT BAY TỰ DO [Phím F]" end
+end)
+
+local farmBtnText = "🥚 BẬT AUTO FARM TRỨNG [Phím G]"
+local farmBtn = createButton(farmBtnText, function()
+    if Farm.enabled then StopFarm() farmBtn.Text = "🥚 BẬT AUTO FARM TRỨNG [Phím G]" Notify("H-HUB", "Đã TẮT Auto Farm")
+    else StartFarm() farmBtn.Text = "🛑 TẮT AUTO FARM TRỨNG [Phím G]" end
+end)
+
+createButton("📍 LƯU VỊ TRÍ MÁY CHẠY BỘ (HOME)", function()
+    Farm.treadmillPos = RootPart.Position
+    Notify("H-HUB", "Đã lưu vị trí máy chạy bộ thành công!")
+end)
+
+-- Chọn Vùng Map (Đã đầy đủ 13 vùng)
+createLabel("--- CHỌN VÙNG MAP (13 VÙNG) ---")
+local currentZoneIdx = 1
+local zoneBtn = createButton("Vùng: " .. ZoneNames[currentZoneIdx], function()
+    currentZoneIdx = currentZoneIdx + 1
+    if currentZoneIdx > #ZoneNames then currentZoneIdx = 1 end
+    Farm.zone = ZoneNames[currentZoneIdx]
+    zoneBtn.Text = "Vùng: " .. Farm.zone
+    Notify("Auto Farm", "Đã đổi vùng: " .. Farm.zone)
+end)
+
+createLabel("--- CHỌN ĐỘ HIẾM TRỨNG ---")
+local currentRarityIdx = 1
+local rarityBtn = createButton("Độ hiếm: " .. Rarities[currentRarityIdx], function()
+    currentRarityIdx = currentRarityIdx + 1
+    if currentRarityIdx > #Rarities then currentRarityIdx = 1 end
+    Farm.rarity = Rarities[currentRarityIdx]
+    rarityBtn.Text = "Độ hiếm: " .. Farm.rarity
+    Notify("Auto Farm", "Đã lọc độ hiếm: " .. Farm.rarity)
+end)
+
+-- Trình phát nhạc (Music Player)
+createLabel("--- TRÌNH PHÁT NHẠC (MUSIC) ---")
+local sound = Instance.new("Sound")
+sound.Name = "CyberMusicTrack"
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = SoundService
+
+local Playlist = {
+    { Name = "Quốc ca Việt Nam", Id = "1845922899" },
+    { Name = "See Tình", Id = "121242950842428" },
+    { Name = "2 Phút Hơn KAIZ Remix", Id = "124166975687737" },
+    { Name = "TRẢ CHO ANH GOJO VS SUKUNA", Id = "110396752508363" },
+    { Name = "Ai đưa em về", Id = "110919391228823" },
+}
+
+for _, track in ipairs(Playlist) do
+    createButton("🎵 Phát: " .. track.Name, function()
+        local numeric = tostring(track.Id):match("%d+")
+        if numeric then
+            sound.SoundId = "rbxassetid://" .. numeric
+            sound:Play()
+            Notify("Nhạc", "Đang phát: " .. track.Name)
         end
     end)
 end
- 
+
+createButton("⏹️ Dừng phát nhạc", function()
+    sound:Stop()
+    Notify("Nhạc", "Đã dừng nhạc.")
+end)
+
 -- ============================================================
--- 4. HỒI SINH
+-- 3. HỒI SINH & PHÍM TẮT (RIGHTSHIFT / INSERT / F / G)
 -- ============================================================
 local respawnConn = Player.CharacterAdded:Connect(function(newChar)
-    local wasFly, wasSpin, wasFarm = Fly.on, Spin.on, Farm.enabled
-    StopFly() StopSpin() StopFarm()
-    Farm.enabled = false
-    Farm.bv = nil
- 
+    local wasFly, wasFarm = Fly.on, Farm.enabled
+    StopFly() StopFarm()
     Character = newChar
     Humanoid = newChar:WaitForChild("Humanoid")
     RootPart = newChar:WaitForChild("HumanoidRootPart")
     task.wait(0.5)
- 
     if wasFly then StartFly() end
-    if wasSpin then StartSpin() end
     if wasFarm then StartFarm() end
 end)
- 
--- ============================================================
--- 5. GIAO DIỆN WIND UI
--- ============================================================
-local Window
-local function CreateGUI()
-    if not WindUI then return false end
-    local ok, err = pcall(function()
-        Window = WindUI:CreateWindow({
-            Title = "Steal a Egg | Safe Edition (WindUI)",
-            Icon = "egg",
-            Author = "H-HUB",
-            Folder = "StealAnEggHub",
-            Size = UDim2.fromOffset(580, 460),
-            Transparent = true,
-            Theme = "Dark",
-            Acrylic = false,
-        })
- 
-        -- Tab Chính
-        local MainTab = Window:Tab({ Title = "Chính", Icon = "home" })
-        MainTab:Paragraph({ Title = "Điều khiển nhanh", Desc = "Dùng phím F để bật/tắt Bay tự do. Phím RightShift/Insert để ẩn/hiện Menu." })
-        
-        FlyToggleRef = MainTab:Toggle({
-            Title = "BẬT BAY [Phím F]",
-            Default = false,
-            Callback = function(v) if v then StartFly() else StopFly() end end,
-        })
- 
-        MainTab:Slider({
-            Title = "Tốc độ bay tự do",
-            Min = 10,
-            Max = 500,
-            Default = 35,
-            Step = 1,
-            Callback = function(v) Fly.speed = v end,
-        })
- 
-        -- Tab Auto Farm
-        local FarmTab = Window:Tab({ Title = "Auto Farm", Icon = "bot" })
-        FarmTab:Paragraph({ Title = "Cài đặt Farm Trứng", Desc = "Dùng phím G để bật/tắt Auto Farm." })
-        
-        FarmToggleRef = FarmTab:Toggle({
-            Title = "BẬT AUTO FARM TRỨNG [Phím G]",
-            Default = false,
-            Callback = function(v) if v then StartFarm() else StopFarm() end end,
-        })
- 
-        FarmTab:Dropdown({
-            Title = "Chọn vùng Map",
-            Values = ZoneNames,
-            Default = ALL,
-            Callback = function(opt) Farm.zone = opt end,
-        })
- 
-        FarmTab:Dropdown({
-            Title = "Chọn độ hiếm trứng",
-            Values = Rarities,
-            Default = "Tất cả độ hiếm",
-            Callback = function(opt) Farm.rarity = opt end,
-        })
- 
-        FarmTab:Slider({
-            Title = "Tốc độ bay đi nhặt trứng",
-            Min = 1,
-            Max = 1000,
-            Default = 200,
-            Step = 5,
-            Callback = function(v) Farm.speed = v end,
-        })
- 
-        FarmTab:Slider({
-            Title = "Thời gian chờ nhặt (Hold/Wait)",
-            Min = 0.05,
-            Max = 0.5,
-            Default = 0.1,
-            Step = 0.05,
-            Callback = function(v) Farm.holdTime = v end,
-        })
- 
-        FarmTab:Button({
-            Title = "Lưu vị trí HIỆN TẠI làm Máy Chạy Bộ",
-            Callback = function()
-                Farm.treadmillPos = RootPart.Position
-                Notify("Auto Farm", "Đã lưu vị trí Máy Chạy Bộ thành công!")
-            end,
-        })
 
-        -- Tab Nhạc (Music Player)
-        local MusicTab = Window:Tab({ Title = "Nhạc", Icon = "music" })
-        local MusicPlayer = {}
-        MusicPlayer.DefaultTrackId = "1845922899"
-        MusicPlayer.Playlist = {
-            { Name = "Quốc ca Việt Nam", Id = "1845922899" },
-            { Name = "See Tình", Id = "121242950842428" },
-            { Name = "2 Phút Hơn KAIZ Remix", Id = "124166975687737" },
-            { Name = "Trái đất yêu mặt trời & Nắng có mang em đi", Id = "140553267266985", From = 29, To = 77 },
-            { Name = "Cùng Anh Remix", Id = "71716020610625" },
-            { Name = "Khuê Mộc Lan", Id = "98361989582185" },
-            { Name = "TRẢ CHO ANH GOJO VS SUKUNA", Id = "110396752508363", From = 163, To = 180 },
-            { Name = "Ai đưa em về", Id = "110919391228823" },
-        }
-
-        local sound = Instance.new("Sound")
-        sound.Name = "MusicPlayerTrack"
-        sound.Volume = 1
-        sound.Looped = true
-        sound.Parent = SoundService
-
-        local state = { Sound = sound, CurrentId = nil }
-
-        local function playId(id, label, from, to)
-            local numeric = tostring(id):match("%d+")
-            if not numeric then
-                Notify("Lỗi", "Audio ID không hợp lệ: " .. tostring(id))
-                return false
-            end
-            sound.SoundId = "rbxassetid://" .. numeric
-            state.CurrentId = numeric
-            if from then sound.TimePosition = from end
-            local successPlay = pcall(function() sound:Play() end)
-            if not successPlay then
-                Notify("Lỗi", "Không phát được ID " .. numeric)
-                return false
-            end
-            if from or to then
-                task.spawn(function()
-                    for _ = 1, 100 do
-                        if sound.IsLoaded then break end
-                        task.wait(0.1)
-                    end
-                    if from then sound.TimePosition = from end
-                    while sound.Playing and (not to or sound.TimePosition < to) do
-                        task.wait(0.1)
-                    end
-                    if to and sound.Playing then sound:Pause() end
-                end)
-            end
-            Notify("Đang phát", label or ("ID " .. numeric))
-            return true
-        end
-
-        MusicTab:Toggle({
-            Title = "Phát / Tạm dừng",
-            Default = false,
-            Callback = function(on)
-                if on then
-                    if state.CurrentId then
-                        pcall(function() sound:Resume() end)
-                    else
-                        playId(MusicPlayer.DefaultTrackId, "Bài mặc định")
-                    end
-                else
-                    pcall(function() sound:Pause() end)
-                end
-            end,
-        })
-
-        MusicTab:Slider({
-            Title = "Âm lượng",
-            Min = 0,
-            Max = 10,
-            Default = 1,
-            Step = 0.1,
-            Callback = function(value) sound.Volume = value end,
-        })
-
-        MusicTab:Input({
-            Title = "Audio ID tùy chỉnh",
-            Placeholder = "Dán ID vào đây...",
-            Callback = function(text) playId(text) end,
-        })
-
-        if #MusicPlayer.Playlist > 0 then
-            for _, track in ipairs(MusicPlayer.Playlist) do
-                MusicTab:Button({
-                    Title = track.Name,
-                    Callback = function()
-                        playId(track.Id, track.Name, track.From, track.To)
-                    end,
-                })
-            end
-        end
-    end)
-    return ok
-end
- 
--- ============================================================
--- 6. PHÍM TẮT (Đã tích hợp phím ẩn/hiện Menu)
--- ============================================================
+local menuVisible = true
 local inputConn = UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
-    
-    -- Phím F: Bật/Tắt Bay
-    if input.KeyCode == Enum.KeyCode.F then
-        if FlyToggleRef then FlyToggleRef:SetValue(not Fly.on) end
-        
-    -- Phím G: Bật/Tắt Auto Farm
+    if input.KeyCode == Enum.KeyCode.RightShift or input.KeyCode == Enum.KeyCode.Insert then
+        menuVisible = not menuVisible
+        mainFrame.Visible = menuVisible
+    elseif input.KeyCode == Enum.KeyCode.F then
+        if Fly.on then StopFly() flyBtn.Text = "🚀 BẬT BAY TỰ DO [Phím F]" Notify("H-HUB", "Đã TẮT Bay")
+        else StartFly() flyBtn.Text = "🛑 TẮT BAY TỰ DO [Phím F]" end
     elseif input.KeyCode == Enum.KeyCode.G then
-        if FarmToggleRef then FarmToggleRef:SetValue(not Farm.enabled) end
-        
-    -- Phím RightShift hoặc Insert: Đóng / Mở (Ẩn / Hiện) Menu WindUI
-    elseif input.KeyCode == Enum.KeyCode.RightShift or input.KeyCode == Enum.KeyCode.Insert then
-        if Window then
-            Window:Toggle()
-        end
+        if Farm.enabled then StopFarm() farmBtn.Text = "🥚 BẬT AUTO FARM TRỨNG [Phím G]" Notify("H-HUB", "Đã TẮT Auto Farm")
+        else StartFarm() farmBtn.Text = "🛑 TẮT AUTO FARM TRỨNG [Phím G]" end
     end
 end)
- 
+
 -- ============================================================
--- 7. DỌN DẸP
+-- 4. DỌN DẸP
 -- ============================================================
 _G.EggFull_Cleanup = function()
     _G.EggFull_Running = false
-    StopFly() StopSpin() StopFarm()
+    StopFly() StopFarm()
     if respawnConn then respawnConn:Disconnect() end
     if inputConn then inputConn:Disconnect() end
-    if WindUI then safeCall(function() WindUI:Destroy() end) end
+    if screenGui then screenGui:Destroy() end
+    if sound then sound:Destroy() end
 end
- 
-local guiLoaded = CreateGUI()
-if guiLoaded then
-    Notify("Steal a Egg", "Đã tích hợp phím ẩn/hiện Menu! Nhấn RightShift hoặc Insert để đóng/mở.")
-end
+
+Notify("Thành công", "Đã fix đủ 13 vùng map! Nhấn RightShift/Insert để ẩn/hiện.")
