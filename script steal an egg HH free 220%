@@ -56,24 +56,7 @@ local function SetNoclip(on)
 end
  
 -- ============================================================
--- 1. BẤT TỬ
--- ============================================================
-local function GodLoop()
-    task.spawn(function()
-        while _G.EggFull_Running do
-            safeCall(function()
-                if Humanoid and Humanoid.Parent then
-                    Humanoid.MaxHealth = math.huge
-                    Humanoid.Health = math.huge
-                end
-            end)
-            task.wait(0.1)
-        end
-    end)
-end
- 
--- ============================================================
--- 2. BAY (có chỉnh tốc độ)
+-- 1. BAY (có chỉnh tốc độ)
 -- ============================================================
 local Fly = {on = false, speed = 35, bv = nil, conn = nil}
  
@@ -131,7 +114,7 @@ local function StartFly()
 end
  
 -- ============================================================
--- 3. XOAY TRÒN
+-- 2. XOAY TRÒN
 -- ============================================================
 local Spin = {on = false, speed = 5, conn = nil}
  
@@ -150,7 +133,7 @@ local function StartSpin()
 end
  
 -- ============================================================
--- 4. AUTO FARM TRỨNG TOÀN DIỆN (VÙNG, ĐỘ HIẾM, NÉ QUÁI, MÁY CHẠY BỘ)
+-- 3. AUTO FARM TRỨNG TOÀN DIỆN (VÙNG, ĐỘ HIẾM, NÉ QUÁI, MÁY CHẠY BỘ)
 -- ============================================================
 local Zones = {
     {name = "1. Forest (Rừng)",              key = "forest"},
@@ -422,7 +405,7 @@ local function StartFarm()
 end
  
 -- ============================================================
--- 5. HỒI SINH
+-- 4. HỒI SINH
 -- ============================================================
 local respawnConn = Player.CharacterAdded:Connect(function(newChar)
     local wasFly, wasSpin, wasFarm = Fly.on, Spin.on, Farm.enabled
@@ -441,15 +424,15 @@ local respawnConn = Player.CharacterAdded:Connect(function(newChar)
 end)
  
 -- ============================================================
--- 6. GIAO DIỆN RAYFIELD UI (TÍCH HỢP TẤT CẢ TÍNH NĂNG & MUSIC)
+-- 5. GIAO DIỆN RAYFIELD UI
 -- ============================================================
 local Window
 local function CreateGUI()
     if not Rayfield then return false end
     local ok, err = pcall(function()
         Window = Rayfield:CreateWindow({
-            Name = "Steal a Egg | Ultimate Edition + Music",
-            LoadingTitle = "Đang khởi động hệ thống...",
+            Name = "Steal a Egg | Safe Edition",
+            LoadingTitle = "Đang khởi động hệ thống an toàn...",
             LoadingSubtitle = "Auto Farm Pro Max & Music Player",
             Theme = "DarkBlue",
             ConfigurationSaving = {Enabled = false},
@@ -640,7 +623,7 @@ local function CreateGUI()
 end
  
 -- ============================================================
--- 7. PHÍM TẮT
+-- 6. PHÍM TẮT
 -- ============================================================
 local inputConn = UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
@@ -652,7 +635,7 @@ local inputConn = UserInputService.InputBegan:Connect(function(input, gp)
 end)
  
 -- ============================================================
--- 8. DỌN DẸP
+-- 7. DỌN DẸP
 -- ============================================================
 _G.EggFull_Cleanup = function()
     _G.EggFull_Running = false
@@ -662,8 +645,7 @@ _G.EggFull_Cleanup = function()
     if Rayfield then safeCall(function() Rayfield:Destroy() end) end
 end
  
-GodLoop()
 local guiLoaded = CreateGUI()
 if guiLoaded then
-    Notify("Steal a Egg", "Đã tải phiên bản hoàn chỉnh! F = Bay, G = Auto Farm")
+    Notify("Steal a Egg", "Đã tải phiên bản an toàn! F = Bay, G = Auto Farm")
 end
