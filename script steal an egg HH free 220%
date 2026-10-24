@@ -9,6 +9,7 @@ local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local VIM = game:GetService("VirtualInputManager")
+local SoundService = game:GetService("SoundService")
  
 local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
@@ -149,7 +150,7 @@ local function StartSpin()
 end
  
 -- ============================================================
--- 4. AUTO FARM TRỨNG NÂNG CAO (CÓ LỰC ĐẨY NÉ QUÁI KHI ĐANG NHẬT)
+-- 4. AUTO FARM TRỨNG TOÀN DIỆN (VÙNG, ĐỘ HIẾM, NÉ QUÁI, MÁY CHẠY BỘ)
 -- ============================================================
 local Zones = {
     {name = "1. Forest (Rừng)",              key = "forest"},
@@ -264,8 +265,7 @@ local function NearestEgg()
     return best
 end
  
--- Hàm tính toán lực đẩy thông minh né quái khi đang bay đến mục tiêu
-local function CalculateMobRepulsion(targetPos, speed)
+local function CalculateMobRepulsion(targetPos)
     local repulsionOffset = Vector3.zero
     if not Farm.enabled then return targetPos end
 
@@ -275,15 +275,12 @@ local function CalculateMobRepulsion(targetPos, speed)
                 local humanoidCheck = obj:FindFirstChildOfClass("Humanoid")
                 local rootCheck = obj:FindFirstChild("HumanoidRootPart") or obj.PrimaryPart
                 
-                -- Nhận diện quái / mob xung quanh
                 if humanoidCheck and rootCheck and not Players:GetPlayerFromCharacter(obj) then
                     local dist = (RootPart.Position - rootCheck.Position).Magnitude
-                    -- Nếu quái lại gần trong khoảng dưới 12 studs khi đang làm nhiệm vụ farm
                     if dist < 12 then
                         local pushDir = (RootPart.Position - rootCheck.Position)
                         pushDir = Vector3.new(pushDir.X, 0, pushDir.Z)
                         if pushDir.Magnitude > 0 then
-                            -- Tạo lực đẩy nhỏ dịch chuyển người chơi giữ khoảng cách vừa đủ, không bị bay quá xa
                             repulsionOffset = repulsionOffset + (pushDir.Unit * (12 - dist) * 0.4)
                         end
                     end
@@ -298,8 +295,7 @@ end
 local function FlyTo(target, speed)
     speed = speed or Farm.speed
     while Farm.enabled and RootPart and RootPart.Parent do
-        -- Cập nhật mục tiêu có tính toán lực đẩy né quái thời gian thực
-        local dynamicTarget = CalculateMobRepulsion(target, speed)
+        local dynamicTarget = CalculateMobRepulsion(target)
         local diff = dynamicTarget - RootPart.Position
         local dist = diff.Magnitude
         if dist < 2 then break end
@@ -388,7 +384,7 @@ local function StartFarm()
     if not Farm.treadmillPos then Farm.treadmillPos = RootPart.Position end
     SetNoclip(true)
  
-    -- Nhảy lên 1 cái trước khi rời máy chạy bộ
+    -- Nhảy lên 1 cái thoát khỏi máy chạy bộ
     safeCall(function()
         if Humanoid then
             Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
@@ -445,16 +441,16 @@ local respawnConn = Player.CharacterAdded:Connect(function(newChar)
 end)
  
 -- ============================================================
--- 6. GIAO DIỆN RAYFIELD UI
+-- 6. GIAO DIỆN RAYFIELD UI (TÍCH HỢP TẤT CẢ TÍNH NĂNG & MUSIC)
 -- ============================================================
 local Window
 local function CreateGUI()
     if not Rayfield then return false end
     local ok, err = pcall(function()
         Window = Rayfield:CreateWindow({
-            Name = "Steal a Egg | Auto Farm Pro",
-            LoadingTitle = "Đang khởi động...",
-            LoadingSubtitle = "Hệ thống Auto Farm thông minh",
+            Name = "Steal a Egg | Ultimate Edition + Music",
+            LoadingTitle = "Đang khởi động hệ thống...",
+            LoadingSubtitle = "Auto Farm Pro Max & Music Player",
             Theme = "DarkBlue",
             ConfigurationSaving = {Enabled = false},
             Discord = {Enabled = false},
@@ -537,6 +533,108 @@ local function CreateGUI()
                 Notify("Auto Farm", "Đã lưu vị trí Máy Chạy Bộ thành công!")
             end,
         })
+
+        -- Tab Nhạc (Music Player)
+        local MusicTab = Window:CreateTab("Nhạc (Music)", 4483362458)
+        local MusicPlayer = {}
+        MusicPlayer.DefaultTrackId = "1845922899"
+        MusicPlayer.Playlist = {
+            { Name = "Quốc ca Việt Nam", Id = "1845922899" },
+            { Name = "See Tình", Id = "121242950842428" },
+            { Name = "2 Phút Hơn KAIZ Remix", Id = "124166975687737" },
+            { Name = "Trái đất yêu mặt trời & Nắng có mang em đi", Id = "140553267266985", From = 29, To = 77 },
+            { Name = "Cùng Anh Remix", Id = "71716020610625" },
+            { Name = "Khuê Mộc Lan", Id = "98361989582185" },
+            { Name = "TRẢ CHO ANH GOJO VS SUKUNA", Id = "110396752508363", From = 163, To = 180 },
+            { Name = "Ai đưa em về", Id = "110919391228823" },
+        }
+
+        local sound = Instance.new("Sound")
+        sound.Name = "MusicPlayerTrack"
+        sound.Volume = 1
+        sound.Looped = true
+        sound.Parent = SoundService
+
+        local state = { Sound = sound, CurrentId = nil }
+
+        local function playId(id, label, from, to)
+            local numeric = tostring(id):match("%d+")
+            if not numeric then
+                Notify("Lỗi", "Audio ID không hợp lệ: " .. tostring(id))
+                return false
+            end
+            sound.SoundId = "rbxassetid://" .. numeric
+            state.CurrentId = numeric
+            if from then sound.TimePosition = from end
+            local successPlay = pcall(function() sound:Play() end)
+            if not successPlay then
+                Notify("Lỗi", "Không phát được ID " .. numeric)
+                return false
+            end
+            if from or to then
+                task.spawn(function()
+                    for _ = 1, 100 do
+                        if sound.IsLoaded then break end
+                        task.wait(0.1)
+                    end
+                    if from then sound.TimePosition = from end
+                    while sound.Playing and (not to or sound.TimePosition < to) do
+                        task.wait(0.1)
+                    end
+                    if to and sound.Playing then sound:Pause() end
+                end)
+            end
+            Notify("Đang phát", label or ("ID " .. numeric))
+            return true
+        end
+
+        MusicTab:CreateSection("Trình điều khiển")
+        MusicTab:CreateToggle({
+            Name = "Phát / Tạm dừng",
+            CurrentValue = false,
+            Flag = "MusicToggle",
+            Callback = function(on)
+                if on then
+                    if state.CurrentId then
+                        pcall(function() sound:Resume() end)
+                    else
+                        playId(MusicPlayer.DefaultTrackId, "Bài mặc định")
+                    end
+                else
+                    pcall(function() sound:Pause() end)
+                end
+            end,
+        })
+
+        MusicTab:CreateSlider({
+            Name = "Âm lượng",
+            Range = {0, 10},
+            Increment = 0.1,
+            Suffix = "",
+            CurrentValue = 1,
+            Flag = "MusicVolume",
+            Callback = function(value) sound.Volume = value end,
+        })
+
+        MusicTab:CreateInput({
+            Name = "Audio ID tùy chỉnh",
+            PlaceholderText = "Dán ID vào đây...",
+            RemoveTextAfterFocusLost = false,
+            Flag = "CustomMusicID",
+            Callback = function(text) playId(text) end,
+        })
+
+        if #MusicPlayer.Playlist > 0 then
+            MusicTab:CreateSection("Playlist")
+            for _, track in ipairs(MusicPlayer.Playlist) do
+                MusicTab:CreateButton({
+                    Name = track.Name,
+                    Callback = function()
+                        playId(track.Id, track.Name, track.From, track.To)
+                    end,
+                })
+            end
+        end
     end)
     return ok
 end
@@ -567,5 +665,5 @@ end
 GodLoop()
 local guiLoaded = CreateGUI()
 if guiLoaded then
-    Notify("Steal a Egg", "Đã tải thành công! F = Bay, G = Auto Farm")
+    Notify("Steal a Egg", "Đã tải phiên bản hoàn chỉnh! F = Bay, G = Auto Farm")
 end
