@@ -23,26 +23,30 @@ local function safeCall(f, ...)
     return nil
 end
  
--- ===== Tải Rayfield =====
-local Rayfield
+-- ===== Tải WindUI (An toàn hơn, né BAC-1513) =====
+local WindUI
 do
     local ok, err = pcall(function()
-        Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+        WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist.lua"))()
     end)
-    if not ok or not Rayfield then
-        warn("[EggFull] Không tải được Rayfield: " .. tostring(err))
+    if not ok or not WindUI then
+        warn("[EggFull] Không tải được WindUI: " .. tostring(err))
     end
 end
  
 local function Notify(title, content)
-    if Rayfield then
+    if WindUI then
         safeCall(function()
-            Rayfield:Notify({Title = title, Content = content, Duration = 3})
+            WindUI:Notify({
+                Title = title,
+                Content = content,
+                Duration = 3
+            })
         end)
     end
 end
  
-local FlyToggle, SpinToggle, FarmToggle
+local FlyToggleRef, FarmToggleRef
  
 -- ============================================================
 -- 0. TIỆN ÍCH
@@ -78,7 +82,7 @@ local function StartFly()
     if Fly.on then return end
     if Farm and Farm.enabled then
         Notify("Bay", "Hãy tắt Auto Farm trước!")
-        if FlyToggle then FlyToggle:Set(false) end
+        if FlyToggleRef then FlyToggleRef:SetValue(false) end
         return
     end
     Fly.on = true
@@ -133,7 +137,7 @@ local function StartSpin()
 end
  
 -- ============================================================
--- 3. AUTO FARM TRỨNG TOÀN DIỆN (VÙNG, ĐỘ HIẾM, NÉ QUÁI, MÁY CHẠY BỘ)
+-- 3. AUTO FARM TRỨNG TOÀN DIỆN
 -- ============================================================
 local Zones = {
     {name = "1. Forest (Rừng)",              key = "forest"},
@@ -360,14 +364,13 @@ end
 local function StartFarm()
     if Farm.enabled then return end
     if Fly.on then
-        if FlyToggle then FlyToggle:Set(false) end
+        if FlyToggleRef then FlyToggleRef:SetValue(false) end
         StopFly()
     end
     Farm.enabled = true
     if not Farm.treadmillPos then Farm.treadmillPos = RootPart.Position end
     SetNoclip(true)
  
-    -- Nhảy lên 1 cái thoát khỏi máy chạy bộ
     safeCall(function()
         if Humanoid then
             Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
@@ -424,93 +427,86 @@ local respawnConn = Player.CharacterAdded:Connect(function(newChar)
 end)
  
 -- ============================================================
--- 5. GIAO DIỆN RAYFIELD UI
+-- 5. GIAO DIỆN WIND UI
 -- ============================================================
 local Window
 local function CreateGUI()
-    if not Rayfield then return false end
+    if not WindUI then return false end
     local ok, err = pcall(function()
-        Window = Rayfield:CreateWindow({
-            Name = "Steal a Egg | Safe Edition",
-            LoadingTitle = "Đang khởi động hệ thống an toàn...",
-            LoadingSubtitle = "Auto Farm Pro Max & Music Player",
-            Theme = "DarkBlue",
-            ConfigurationSaving = {Enabled = false},
-            Discord = {Enabled = false},
-            KeySystem = false,
+        Window = WindUI:CreateWindow({
+            Title = "Steal a Egg | Safe Edition (WindUI)",
+            Icon = "egg",
+            Author = "H-HUB",
+            Folder = "StealAnEggHub",
+            Size = UDim2.fromOffset(580, 460),
+            Transparent = true,
+            Theme = "Dark",
+            Acrylic = false,
         })
  
         -- Tab Chính
-        local Main = Window:CreateTab("Chính", 4483362458)
-        Main:CreateSection("Điều khiển nhanh")
-        FlyToggle = Main:CreateToggle({
-            Name = "BẬT BAY [Phím F]",
-            CurrentValue = false,
-            Flag = "FlyToggle",
+        local MainTab = Window:Tab({ Title = "Chính", Icon = "home" })
+        MainTab:Paragraph({ Title = "Điều khiển nhanh", Desc = "Dùng phím F để bật/tắt Bay tự do. Phím RightShift/Insert để ẩn/hiện Menu." })
+        
+        FlyToggleRef = MainTab:Toggle({
+            Title = "BẬT BAY [Phím F]",
+            Default = false,
             Callback = function(v) if v then StartFly() else StopFly() end end,
         })
-        Main:CreateSlider({
-            Name = "Tốc độ bay tự do",
-            Range = {10, 500},
-            Increment = 1,
-            Suffix = "đơn vị",
-            CurrentValue = 35,
-            Flag = "FlySpeed",
+ 
+        MainTab:Slider({
+            Title = "Tốc độ bay tự do",
+            Min = 10,
+            Max = 500,
+            Default = 35,
+            Step = 1,
             Callback = function(v) Fly.speed = v end,
         })
  
         -- Tab Auto Farm
-        local RefTab = Window:CreateTab("Auto Farm", 4483362458)
-        RefTab:CreateSection("Cài đặt Farm Trứng")
+        local FarmTab = Window:Tab({ Title = "Auto Farm", Icon = "bot" })
+        FarmTab:Paragraph({ Title = "Cài đặt Farm Trứng", Desc = "Dùng phím G để bật/tắt Auto Farm." })
         
-        FarmToggle = RefTab:CreateToggle({
-            Name = "BẬT AUTO FARM TRỨNG [Phím G]",
-            CurrentValue = false,
-            Flag = "AutoFarm",
+        FarmToggleRef = FarmTab:Toggle({
+            Title = "BẬT AUTO FARM TRỨNG [Phím G]",
+            Default = false,
             Callback = function(v) if v then StartFarm() else StopFarm() end end,
         })
  
-        RefTab:CreateDropdown({
-            Name = "Chọn vùng Map",
-            Options = ZoneNames,
-            CurrentOption = {ALL},
-            MultipleOptions = false,
-            Flag = "FarmZone",
-            Callback = function(opt) Farm.zone = (type(opt) == "table") and opt[1] or opt end,
+        FarmTab:Dropdown({
+            Title = "Chọn vùng Map",
+            Values = ZoneNames,
+            Default = ALL,
+            Callback = function(opt) Farm.zone = opt end,
         })
  
-        RefTab:CreateDropdown({
-            Name = "Chọn độ hiếm trứng",
-            Options = Rarities,
-            CurrentOption = {"Tất cả độ hiếm"},
-            MultipleOptions = false,
-            Flag = "FarmRarity",
-            Callback = function(opt) Farm.rarity = (type(opt) == "table") and opt[1] or opt end,
+        FarmTab:Dropdown({
+            Title = "Chọn độ hiếm trứng",
+            Values = Rarities,
+            Default = "Tất cả độ hiếm",
+            Callback = function(opt) Farm.rarity = opt end,
         })
  
-        RefTab:CreateSlider({
-            Name = "Tốc độ bay đi nhặt trứng",
-            Range = {1, 1000},
-            Increment = 5,
-            Suffix = "đơn vị",
-            CurrentValue = 200,
-            Flag = "FarmSpeed",
+        FarmTab:Slider({
+            Title = "Tốc độ bay đi nhặt trứng",
+            Min = 1,
+            Max = 1000,
+            Default = 200,
+            Step = 5,
             Callback = function(v) Farm.speed = v end,
         })
  
-        RefTab:CreateSlider({
-            Name = "Thời gian chờ nhặt (Hold/Wait)",
-            Range = {0.05, 0.5},
-            Increment = 0.05,
-            Suffix = "giây",
-            CurrentValue = 0.1,
-            Flag = "FarmHold",
+        FarmTab:Slider({
+            Title = "Thời gian chờ nhặt (Hold/Wait)",
+            Min = 0.05,
+            Max = 0.5,
+            Default = 0.1,
+            Step = 0.05,
             Callback = function(v) Farm.holdTime = v end,
         })
  
-        RefTab:CreateSection("Cài đặt Máy Chạy Bộ (Home)")
-        RefTab:CreateButton({
-            Name = "Lưu vị trí HIỆN TẠI làm Máy Chạy Bộ",
+        FarmTab:Button({
+            Title = "Lưu vị trí HIỆN TẠI làm Máy Chạy Bộ",
             Callback = function()
                 Farm.treadmillPos = RootPart.Position
                 Notify("Auto Farm", "Đã lưu vị trí Máy Chạy Bộ thành công!")
@@ -518,7 +514,7 @@ local function CreateGUI()
         })
 
         -- Tab Nhạc (Music Player)
-        local MusicTab = Window:CreateTab("Nhạc (Music)", 4483362458)
+        local MusicTab = Window:Tab({ Title = "Nhạc", Icon = "music" })
         local MusicPlayer = {}
         MusicPlayer.DefaultTrackId = "1845922899"
         MusicPlayer.Playlist = {
@@ -571,11 +567,9 @@ local function CreateGUI()
             return true
         end
 
-        MusicTab:CreateSection("Trình điều khiển")
-        MusicTab:CreateToggle({
-            Name = "Phát / Tạm dừng",
-            CurrentValue = false,
-            Flag = "MusicToggle",
+        MusicTab:Toggle({
+            Title = "Phát / Tạm dừng",
+            Default = false,
             Callback = function(on)
                 if on then
                     if state.CurrentId then
@@ -589,29 +583,25 @@ local function CreateGUI()
             end,
         })
 
-        MusicTab:CreateSlider({
-            Name = "Âm lượng",
-            Range = {0, 10},
-            Increment = 0.1,
-            Suffix = "",
-            CurrentValue = 1,
-            Flag = "MusicVolume",
+        MusicTab:Slider({
+            Title = "Âm lượng",
+            Min = 0,
+            Max = 10,
+            Default = 1,
+            Step = 0.1,
             Callback = function(value) sound.Volume = value end,
         })
 
-        MusicTab:CreateInput({
-            Name = "Audio ID tùy chỉnh",
-            PlaceholderText = "Dán ID vào đây...",
-            RemoveTextAfterFocusLost = false,
-            Flag = "CustomMusicID",
+        MusicTab:Input({
+            Title = "Audio ID tùy chỉnh",
+            Placeholder = "Dán ID vào đây...",
             Callback = function(text) playId(text) end,
         })
 
         if #MusicPlayer.Playlist > 0 then
-            MusicTab:CreateSection("Playlist")
             for _, track in ipairs(MusicPlayer.Playlist) do
-                MusicTab:CreateButton({
-                    Name = track.Name,
+                MusicTab:Button({
+                    Title = track.Name,
                     Callback = function()
                         playId(track.Id, track.Name, track.From, track.To)
                     end,
@@ -623,14 +613,24 @@ local function CreateGUI()
 end
  
 -- ============================================================
--- 6. PHÍM TẮT
+-- 6. PHÍM TẮT (Đã tích hợp phím ẩn/hiện Menu)
 -- ============================================================
 local inputConn = UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
+    
+    -- Phím F: Bật/Tắt Bay
     if input.KeyCode == Enum.KeyCode.F then
-        if FlyToggle then FlyToggle:Set(not Fly.on) end
+        if FlyToggleRef then FlyToggleRef:SetValue(not Fly.on) end
+        
+    -- Phím G: Bật/Tắt Auto Farm
     elseif input.KeyCode == Enum.KeyCode.G then
-        if FarmToggle then FarmToggle:Set(not Farm.enabled) end
+        if FarmToggleRef then FarmToggleRef:SetValue(not Farm.enabled) end
+        
+    -- Phím RightShift hoặc Insert: Đóng / Mở (Ẩn / Hiện) Menu WindUI
+    elseif input.KeyCode == Enum.KeyCode.RightShift or input.KeyCode == Enum.KeyCode.Insert then
+        if Window then
+            Window:Toggle()
+        end
     end
 end)
  
@@ -642,10 +642,10 @@ _G.EggFull_Cleanup = function()
     StopFly() StopSpin() StopFarm()
     if respawnConn then respawnConn:Disconnect() end
     if inputConn then inputConn:Disconnect() end
-    if Rayfield then safeCall(function() Rayfield:Destroy() end) end
+    if WindUI then safeCall(function() WindUI:Destroy() end) end
 end
  
 local guiLoaded = CreateGUI()
 if guiLoaded then
-    Notify("Steal a Egg", "Đã tải phiên bản an toàn! F = Bay, G = Auto Farm")
+    Notify("Steal a Egg", "Đã tích hợp phím ẩn/hiện Menu! Nhấn RightShift hoặc Insert để đóng/mở.")
 end
