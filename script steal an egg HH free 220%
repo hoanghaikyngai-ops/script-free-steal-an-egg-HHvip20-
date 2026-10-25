@@ -1,12 +1,2035 @@
 --[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+    H-HUB v11.0 - Steal An Egg (Bản đầy đủ chức năng)
+    Gốc: Hoanghai (H-HUB Dev)
 
+    Tabs: Cày Cuốc | Quái Vật | Người Chơi | Dự Đoán | Tiến Trình | Máy Chủ | Khác | Nhạc | Cấu Hình | Phím Tắt | Cài Đặt
+    Phím mặc định: F = Bay | G = Farm trứng | H = Farm quái | RightShift = Ẩn/Hiện menu (đổi được trong tab Phím Tắt)
 ]]--
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v116,v117) local v118={};for v184=1, #v116 do v6(v118,v0(v4(v1(v2(v116,v184,v184 + 1 )),v1(v2(v117,1 + (v184% #v117) ,1 + (v184% #v117) + 1 )))%256 ));end return v5(v118);end if _G.EggFull_Cleanup then local v185=0 + 0 ;while true do if (v185==(0 + 0)) then pcall(_G.EggFull_Cleanup);task.wait(533.3 -(43 + 490) );break;end end end _G.EggFull_Running=true;local v8=game:GetService(v7("\225\207\218\60\227\169\212","\126\177\163\187\69\134\219\167"));local v9=game:GetService(v7("\22\222\47\215\213\45\221\63\209\207\38\223\60\204\255\38","\156\67\173\74\165"));local v10=game:GetService(v7("\6\162\71\37\185\52\80\61\180\76","\38\84\215\41\118\220\70"));local v11=game:GetService(v7("\103\25\48\25\237\64\23\33\23","\158\48\118\66\114"));local v12=game:GetService(v7("\152\43\5\56\119\150\254\185\50\25\53\118","\155\203\68\112\86\19\197"));local v13=v8.LocalPlayer;local v14=v13.Character or v13.CharacterAdded:Wait() ;local v15=v14:WaitForChild(v7("\110\200\59\253\78\119\236\252","\152\38\189\86\156\32\24\133"));local v16=v14:WaitForChild(v7("\212\66\170\71\242\88\174\66\206\88\168\82\204\86\181\82","\38\156\55\199"));local function v17(v119,...) local v120=0;local v121;local v122;local v123;while true do if (v120==(734 -(711 + 22))) then v123=nil;while true do if (v121==(0 -0)) then v122,v123=pcall(v119,...);if v122 then return v123;end v121=860 -(240 + 619) ;end if (v121==1) then return nil;end end break;end if (v120==(0 + 0)) then v121=0 -0 ;v122=nil;v120=1 + 0 ;end end end local function v18() local v124=1744 -(1344 + 400) ;local v125;local v126;while true do local v186=405 -(255 + 150) ;while true do if (v186==(0 + 0)) then if (v124==(1 + 0)) then return v13:WaitForChild(v7("\41\179\208\198\136\62\19\12\182","\84\121\223\177\191\237\76"));end if (v124==(0 -0)) then local v294=0;while true do if (v294==1) then v124=3 -2 ;break;end if (v294==(1739 -(404 + 1335))) then v125,v126=pcall(function() if gethui then return gethui();end return game:GetService(v7("\139\114\110\45\52\97\243","\35\200\29\28\72\115\20\154"));end);if (v125 and v126) then return v126;end v294=407 -(183 + 223) ;end end end break;end end end end local v19=Instance.new(v7("\136\85\219\165\63\94\23\212\178","\161\219\54\169\192\90\48\80"));v19.Name=v7("\122\71\3\48\91\71\40\48\75\119\41","\69\41\34\96");v19.IgnoreGuiInset=true;v19.ResetOnSpawn=false;v19.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v19.Parent=v18();local v26=Instance.new(v7("\154\209\214\7\7","\75\220\163\183\106\98"));v26.Size=UDim2.new(0 -0 ,186 + 94 ,1 + 0 ,0);v26.Position=UDim2.new(338 -(10 + 327) , -(202 + 88),338 -(118 + 220) ,7 + 13 );v26.BackgroundTransparency=450 -(108 + 341) ;v26.Parent=v19;local function v31(v127,v128) task.spawn(function() local v187=Instance.new(v7("\36\168\138\58\220","\185\98\218\235\87"));v187.Size=UDim2.new(1 + 0 ,0 -0 ,0,1548 -(711 + 782) );v187.Position=UDim2.new(1 -0 ,469 -(270 + 199) ,0,0);v187.BackgroundColor3=Color3.fromRGB(5 + 10 ,15,1844 -(580 + 1239) );v187.BackgroundTransparency=0.15 -0 ;v187.BorderSizePixel=0;v187.Parent=v26;local v194=Instance.new(v7("\254\21\4\233\204\164\206\46","\202\171\92\71\134\190"));v194.CornerRadius=UDim.new(0 + 0 ,6);v194.Parent=v187;local v197=Instance.new(v7("\28\232\31\156\59\206\39\141","\232\73\161\76"));v197.Color=Color3.fromRGB(0,8 + 192 ,255);v197.Thickness=1 + 0 ;v197.Parent=v187;local v201=Instance.new(v7("\143\220\90\73\50\186\219\71\81","\126\219\185\34\61"));v201.Size=UDim2.new(2 -1 , -(7 + 3),1167 -(645 + 522) ,22);v201.Position=UDim2.new(1790 -(1010 + 780) ,8 + 0 ,0,19 -15 );v201.BackgroundTransparency=2 -1 ;v201.Font=Enum.Font.GothamBold;v201.TextSize=13;v201.TextColor3=Color3.fromRGB(0,2036 -(1045 + 791) ,645 -390 );v201.TextXAlignment=Enum.TextXAlignment.Left;v201.Text=v127;v201.Parent=v187;local v213=Instance.new(v7("\56\203\70\102\82\118\241\226\0","\135\108\174\62\18\30\23\147"));v213.Size=UDim2.new(1 -0 , -(515 -(351 + 154)),1574 -(1281 + 293) ,291 -(28 + 238) );v213.Position=UDim2.new(0,8,0 -0 ,1585 -(1381 + 178) );v213.BackgroundTransparency=1 + 0 ;v213.Font=Enum.Font.Gotham;v213.TextSize=11;v213.TextColor3=Color3.fromRGB(200,162 + 38 ,94 + 126 );v213.TextXAlignment=Enum.TextXAlignment.Left;v213.Text=v128;v213.Parent=v187;v187:TweenPosition(UDim2.new(0,0 -0 ,0 + 0 ,470 -(381 + 89) ),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.25 + 0 ,true);task.wait(2.5);v187:TweenPosition(UDim2.new(1,34 + 16 ,0 -0 ,1156 -(1074 + 82) ),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.25 -0 ,true);task.wait(0.25);v187:Destroy();end);end local v32=Instance.new(v7("\144\251\43\198\29","\167\214\137\74\171\120\206\83"));v32.Name=v7("\166\241\59\83\222\181\138\253\55","\199\235\144\82\61\152");v32.Size=UDim2.new(1784 -(214 + 1570) ,1915 -(990 + 465) ,0,157 + 223 );v32.Position=UDim2.new(0.5 + 0 , -(224 + 6),0.5 -0 , -190);v32.BackgroundColor3=Color3.fromRGB(1736 -(1668 + 58) ,636 -(512 + 114) ,18);v32.BackgroundTransparency=0.1 -0 ;v32.BorderSizePixel=0;v32.Active=true;v32.Draggable=true;v32.Parent=v19;local v42=Instance.new(v7("\50\63\154\36\21\24\188\57","\75\103\118\217"));v42.CornerRadius=UDim.new(0 -0 ,34 -24 );v42.Parent=v32;local v45=Instance.new(v7("\242\125\67\0\171\17\204\81","\126\167\52\16\116\217"));v45.Color=Color3.fromRGB(0,200,119 + 136 );v45.Thickness=1.5 + 0 ;v45.Parent=v32;local v49=Instance.new(v7("\238\60\33\141\177","\156\168\78\64\224\212\121"));v49.Size=UDim2.new(1 + 0 ,0,0 -0 ,2032 -(109 + 1885) );v49.BackgroundColor3=Color3.fromRGB(1487 -(1269 + 200) ,34 -16 ,845 -(98 + 717) );v49.BorderSizePixel=0;v49.Parent=v32;local v54=Instance.new(v7("\50\199\134\193\21\224\160\220","\174\103\142\197"));v54.CornerRadius=UDim.new(826 -(802 + 24) ,17 -7 );v54.Parent=v49;local v57=Instance.new(v7("\98\45\71\44\9\95\250\83\36","\152\54\72\63\88\69\62"));v57.Size=UDim2.new(1 -0 , -(3 + 12),1,0 + 0 );v57.Position=UDim2.new(0 + 0 ,3 + 9 ,0 -0 ,0 -0 );v57.BackgroundTransparency=1;v57.Font=Enum.Font.GothamBold;v57.TextSize=5 + 8 ;v57.TextColor3=Color3.fromRGB(0 + 0 ,200,211 + 44 );v57.TextXAlignment=Enum.TextXAlignment.Left;v57.Text="⚡ SECURE HUB // 13 ZONES (Anti-BAC Bypass)";v57.Parent=v49;local v69=Instance.new(v7("\231\199\252\83\216\200\231\82\211\226\252\93\217\193","\60\180\164\142"));v69.Size=UDim2.new(1 + 0 , -16,1 + 0 , -(1483 -(797 + 636)));v69.Position=UDim2.new(0 -0 ,1627 -(1427 + 192) ,0 + 0 ,101 -57 );v69.BackgroundTransparency=1 + 0 ;v69.ScrollBarThickness=2 + 1 ;v69.CanvasSize=UDim2.new(326 -(192 + 134) ,0,2.4,0);v69.Parent=v32;local v76=Instance.new(v7("\109\119\41\32\52\249\62\89\71\10\60\51","\114\56\62\101\73\71\141"));v76.Padding=UDim.new(1276 -(316 + 960) ,4 + 2 );v76.SortOrder=Enum.SortOrder.LayoutOrder;v76.Parent=v69;local function v81(v129) local v130=0;local v131;while true do if (v130==(4 + 0)) then local v250=0 + 0 ;while true do if (v250==(0 -0)) then v131.Parent=v69;return v131;end end end if (v130==(552 -(83 + 468))) then v131.BackgroundTransparency=1807 -(1202 + 604) ;v131.Font=Enum.Font.GothamBold;v130=9 -7 ;end if (v130==(0 -0)) then local v254=0;while true do if (0==v254) then v131=Instance.new(v7("\140\236\195\208\148\232\217\193\180","\164\216\137\187"));v131.Size=UDim2.new(1,0,0,22);v254=2 -1 ;end if (v254==(326 -(45 + 280))) then v130=1 + 0 ;break;end end end if (v130==3) then v131.TextXAlignment=Enum.TextXAlignment.Left;v131.Text=v7("\146\166","\107\178\134\81\210\198\158")   .. v129 ;v130=4;end if (v130==(2 + 0)) then v131.TextSize=12;v131.TextColor3=Color3.fromRGB(0 + 0 ,255,100 + 80 );v130=1 + 2 ;end end end local function v82(v132,v133) local v134=0 -0 ;local v135;local v136;local v137;while true do if (v134==(1913 -(340 + 1571))) then local v260=0 + 0 ;local v261;while true do if (v260==(1772 -(1733 + 39))) then v261=0 -0 ;while true do if (v261==0) then v135.Text=v132;v135.AutoButtonColor=false;v261=1035 -(125 + 909) ;end if (v261==(1949 -(1096 + 852))) then v135.Parent=v69;v134=3;break;end end break;end end end if (v134==3) then v136=Instance.new(v7("\246\38\161\248\216\205\10\144","\170\163\111\226\151"));v136.CornerRadius=UDim.new(0 + 0 ,6);v136.Parent=v135;v134=5 -1 ;end if (v134==(1 + 0)) then v135.Font=Enum.Font.GothamBold;v135.TextSize=12;v135.TextColor3=Color3.fromRGB(752 -(409 + 103) ,240,491 -(46 + 190) );v134=2;end if (4==v134) then v137=Instance.new(v7("\36\25\129\44\92\56\34\20","\73\113\80\210\88\46\87"));v137.Color=Color3.fromRGB(95 -(51 + 44) ,200,72 + 183 );v137.Transparency=1317.5 -(1114 + 203) ;v134=731 -(228 + 498) ;end if (v134==(2 + 3)) then v137.Parent=v135;v135.MouseButton1Click:Connect(v133);return v135;end if (0==v134) then local v271=0 + 0 ;while true do if (v271==(663 -(174 + 489))) then v135=Instance.new(v7("\12\11\154\210\136\45\26\150\201\164","\202\88\110\226\166"));v135.Size=UDim2.new(1,0,0 -0 ,1939 -(830 + 1075) );v271=1;end if (v271==(525 -(303 + 221))) then v135.BackgroundColor3=Color3.fromRGB(1289 -(231 + 1038) ,17 + 3 ,1197 -(171 + 991) );v134=1;break;end end end end end local function v83(v138) v17(function() for v239,v240 in ipairs(v14:GetDescendants()) do if v240:IsA(v7("\163\45\222\23\215\128\62\217","\135\225\76\173\114")) then v240.CanCollide= not v138;end end end);end local v84={[v7("\21\227","\199\122\141\216\208\204\221")]=false,[v7("\190\205\21\245\124","\150\205\189\112\144\24")]=144 -109 ,[v7("\39\146","\112\69\228\223\44\100\232\113")]=nil,[v7("\215\16\9\221","\230\180\127\103\179\214\28")]=nil};local v85={{[v7("\130\4\82\67","\128\236\101\63\38\132\33")]="1. Forest (Rừng)",[v7("\167\172\8","\175\204\201\113\36\214\139")]=v7("\65\195\39\217\23\83","\100\39\172\85\188")},{[v7("\163\121\180\133","\83\205\24\217\224")]="2. Lake (Hồ nước)",[v7("\237\192\212","\93\134\165\173")]=v7("\178\243\202\199","\30\222\146\161\162\90\174\210")},{[v7("\235\79\125\15","\106\133\46\16")]="3. Desert (Sa mạc)",[v7("\83\37\106","\32\56\64\19\156\58")]=v7("\94\205\246\83\72\230","\224\58\168\133\54\58\146")},{[v7("\87\87\70\248","\107\57\54\43\157\21\230\231")]="4. Jungle (Rừng rậm)",[v7("\208\142\8","\175\187\235\113\149\217\188")]=v7("\54\186\143\75\239\124","\24\92\207\225\44\131\25")},{[v7("\69\210\181\73","\29\43\179\216\44\123")]="5. Snow (Băng tuyết)",[v7("\182\220\57","\44\221\185\64")]=v7("\18\233\71\72","\19\97\135\40\63")},{[v7("\160\93\62\62","\81\206\60\83\91\79")]="6. Volcano (Núi lửa)",[v7("\69\174\201","\196\46\203\176\18\79\163\45")]=v7("\174\45\114\29\37\245\224","\143\216\66\30\126\68\155")},{[v7("\164\201\0\206","\129\202\168\109\171\165\195\183")]="7. Abyss Ocean (Đại dương sâu)",[v7("\41\93\46","\134\66\56\87\184\190\116")]=v7("\61\51\16\168\10","\85\92\81\105\219\121\139\65")},{[v7("\243\178\93\64","\191\157\211\48\37\28")]="8. Prehistoric (Tiền sử)",[v7("\212\26\237","\90\191\127\148\124")]=v7("\104\149\43\31\113\148\58\24\106\142\45","\119\24\231\78")},{[v7("\140\44\168\79","\113\226\77\197\42\188\32")]="9. Cosmic (Vũ trụ)",[v7("\49\19\237","\213\90\118\148")]=v7("\88\33\167\91\68\88","\45\59\78\212\54")},{[v7("\30\87\142\142","\144\112\54\227\235\230\78\205")]="10. Cherry Blossom (Anh đào)",[v7("\184\45\22","\59\211\72\111\156\176")]=v7("\77\143\230\63\92\158","\77\46\231\131")},{[v7("\180\85\187\69","\32\218\52\214")]="11. Titan Temple (Đền Titan)",[v7("\69\18\40","\58\46\119\81\200\145\208\37")]=v7("\63\133\36\173\167","\86\75\236\80\204\201\221")},{[v7("\124\64\122\128","\235\18\33\23\229\158")]=v7("\1\232\143\251\113\180\198\190\92\169\129\186\94\190\129\159\85\183\206\181\67","\219\48\218\161"),[v7("\239\116\101","\128\132\17\28\41\187\47")]=v7("\0\60\1\63\81","\61\97\82\102\90")},{[v7("\162\47\166\78","\105\204\78\203\43\167\55\126")]=v7("\244\249\109\94\54\10\196\89\164\164\55\27\23\68\225\94\183\175\48\10","\49\197\202\67\126\115\100\167"),[v7("\60\94\198","\62\87\59\191\73\224\54")]=v7("\226\12\249\193\230\12\238\204\227","\169\135\98\154")}};local v86="Tất cả vùng";local v87={v86};for v139,v140 in ipairs(v85) do table.insert(v87,v140.name);end local v88={"Tất cả độ hiếm",v7("\232\120\41\89\242\61","\168\171\23\68\52\157\83"),v7("\198\112\231\168","\231\148\17\149\205\69\77"),v7("\165\183\206\248","\159\224\199\167\155\55"),v7("\219\246\59\215\249\247\61\192\238","\178\151\147\92"),v7("\161\228\88\58\27\79","\26\236\157\44\82\114\44")};local v89={[v7("\47\32\212\89\38\43\209","\59\74\78\181")]=false,[v7("\63\222\84\95","\211\69\177\58\58")]=v86,[v7("\165\228\107\252\253\210","\171\215\133\25\149\137")]="Tất cả độ hiếm",[v7("\242\216\55\255\235","\34\129\168\82\154\143\80\156")]=180,[v7("\141\189\63\15\124\71\132\128","\233\229\210\83\107\40\46")]=0.1 -0 ,[v7("\213\80\55\215\1\204\75\62\218\53\206\81","\101\161\34\82\182")]=nil,[v7("\234\27","\78\136\109\57\158\187\130\226")]=nil,[v7("\42\55\235\244\63\59","\145\94\95\153")]=nil};local function v90() local v141=0;while true do if (v141==(0 -0)) then v84.on=false;if v84.conn then local v287=0 -0 ;while true do if (v287==(711 -(530 + 181))) then v84.conn:Disconnect();v84.conn=nil;break;end end end v141=882 -(614 + 267) ;end if (v141==(33 -(19 + 13))) then if v84.bv then local v288=0;while true do if (v288==(0 -0)) then v17(function() v84.bv:Destroy();end);v84.bv=nil;break;end end end v83(false);break;end end end local function v91() local v142=0 -0 ;while true do if ((0 -0)==v142) then if v84.on then return;end v84.on=true;v142=1 + 0 ;end if (v142==(6 -2)) then v31(v7("\23\181\146","\186\85\212\235\146"),"Đã BẬT Bay Tự Do [Phím F]");break;end if (v142==(3 -1)) then v84.bv.Velocity=Vector3.zero;v84.bv.Parent=v16;v142=1815 -(1293 + 519) ;end if (v142==(5 -2)) then v83(true);v84.conn=v10.Heartbeat:Connect(function() if ( not v84.on or  not v16 or  not v16.Parent or  not v84.bv) then return;end local v285=v15.MoveDirection;if v9:IsKeyDown(Enum.KeyCode.Space) then v285=v285 + Vector3.new(0 -0 ,1 -0 ,0) ;end if v9:IsKeyDown(Enum.KeyCode.LeftShift) then v285=v285-Vector3.new(0 -0 ,1,0 -0 ) ;end if (v285.Magnitude>0.01) then v84.bv.Velocity=v285.Unit * v84.speed ;else v84.bv.Velocity=Vector3.zero;end end);v142=3 + 1 ;end if (v142==1) then v84.bv=Instance.new(v7("\223\194\16\204\120\178\241\194\23\220\90\174","\215\157\173\116\181\46"));v84.bv.MaxForce=Vector3.new(20402 + 79598 ,100000,232351 -132351 );v142=1 + 1 ;end end end local function v92(v143) local v144=0 + 0 ;local v145;while true do if (v144==(0 + 0)) then if  not v143 then return nil;end if v143:IsA(v7("\224\128\5\251\9\239\74\214","\56\162\225\118\158\89\142")) then return v143.Position;end v144=1097 -(709 + 387) ;end if (v144==1) then if v143:IsA(v7("\113\10\196\170\46","\184\60\101\160\207\66")) then return v143:GetPivot().Position;end v145=v143:FindFirstAncestorWhichIsA(v7("\19\131\111\185\1\131\110\168","\220\81\226\28"));v144=1860 -(673 + 1185) ;end if (v144==(5 -3)) then if v145 then return v145.Position;end return nil;end end end local function v93(v146) local v147=0;local v148;local v149;local v150;while true do if (v147==1) then v150=nil;while true do if (v148==(6 -4)) then while v150 and (v150~=v11)  do local v307=0 -0 ;while true do if (v307==(0 + 0)) then if v150.Name:lower():find(v149,1 + 0 ,true) then return true;end v150=v150.Parent;break;end end end return false;end if (1==v148) then for v308,v309 in ipairs(v85) do if (v309.name==v89.zone) then v149=v309.key:lower();break;end end v150=v146;v148=2 -0 ;end if (v148==0) then if (v89.zone==v86) then return true;end v149="";v148=1 + 0 ;end end break;end if (v147==0) then v148=0;v149=nil;v147=1;end end end local function v94(v151,v152) local v153=0 -0 ;local v154;local v155;while true do if ((3 -1)==v153) then return false;end if (v153==(1881 -(446 + 1434))) then v155=(v152.ActionText   .. " "   .. v152.ObjectText   .. " "   .. v151.Name):lower();if v155:find(v154,1,true) then return true;end v153=1285 -(1040 + 243) ;end if (v153==(0 -0)) then if (v89.rarity=="Tất cả độ hiếm") then return true;end v154=v89.rarity:lower();v153=1848 -(559 + 1288) ;end end end local function v95() local v156={};for v224,v225 in ipairs(v11:GetDescendants()) do if (v225:IsA(v7("\35\199\141\227\227\202\26\193\155\203\248\200\30\197\150","\167\115\181\226\155\138")) and v225.Enabled) then local v280=1931 -(609 + 1322) ;local v281;while true do if (v280==(454 -(13 + 441))) then v281=v225.Parent;if v281 then local v312=0 -0 ;local v313;while true do if (v312==0) then v313=(v225.ActionText   .. " "   .. v225.ObjectText   .. " "   .. v281.Name):lower();if (v313:find(v7("\231\37\224","\166\130\66\135\60\27\17"),2 -1 ,true) or v313:find("trứng",4 -3 ,true)) then local v330=0;local v331;while true do if (v330==(0 + 0)) then v331=v92(v281);if (v331 and v93(v281) and v94(v281,v225)) then table.insert(v156,{[v7("\84\88\193\120\32\80","\80\36\42\174\21")]=v225,[v7("\94\31\36","\26\46\112\87")]=v331});end break;end end end break;end end end break;end end end end return v156;end local function v96() local v157,v158;for v226,v227 in ipairs(v95()) do local v228=0 -0 ;local v229;while true do if (v228==(0 + 0)) then v229=(v227.pos-v16.Position).Magnitude;if ( not v158 or (v229<v158)) then v157,v158=v227,v229;end break;end end end return v157;end local function v97(v159,v160) while v89.enabled and v16 and v16.Parent  do local v230=v159-v16.Position ;local v231=v230.Magnitude;if (v231<(1 + 1)) then break;end local v232=v10.Heartbeat:Wait();local v233=math.min(v231,v160 * v232 );v16.CFrame=CFrame.new(v16.Position + (v230.Unit * v233) );v16.AssemblyLinearVelocity=Vector3.zero;end end local function v98() local v161=0;local v162;while true do if ((0 -0)==v161) then v162=0 + 0 ;while true do if ((0 -0)==v162) then v89.enabled=false;if v89.bv then local v314=0;local v315;while true do if ((0 + 0)==v314) then v315=0 + 0 ;while true do if ((0 + 0)==v315) then v17(function() v89.bv:Destroy();end);v89.bv=nil;break;end end break;end end end v162=1;end if ((1 + 0)==v162) then v83(false);break;end end break;end end end local function v99() if v89.enabled then return;end v89.enabled=true;if  not v89.treadmillPos then v89.treadmillPos=v16.Position;end v83(true);v89.bv=Instance.new(v7("\155\44\175\109\137\186\73\187\186\42\191\109","\212\217\67\203\20\223\223\37"));v89.bv.MaxForce=Vector3.new(100000,100000,100000);v89.bv.Velocity=Vector3.zero;v89.bv.Parent=v16;v89.thread=task.spawn(function() while v89.enabled and _G.EggFull_Running  do local v243=0 + 0 ;local v244;local v245;while true do if (v243==(433 -(153 + 280))) then v244,v245=pcall(function() local v304=0 -0 ;local v305;while true do if (v304==0) then v305=v96();if v305 then local v325=0 + 0 ;while true do if (v325==(1 + 0)) then task.wait(v89.holdTime);break;end if (v325==(0 + 0)) then v97(v305.pos + Vector3.new(0,3,0 + 0 ) ,v89.speed);if (fireproximityprompt and v305.prompt.Parent) then v17(function() fireproximityprompt(v305.prompt);end);end v325=1;end end else local v326=0 + 0 ;while true do if (v326==0) then if v89.treadmillPos then v97(v89.treadmillPos,v89.speed);end task.wait(0.5 -0 );break;end end end break;end end end);if  not v244 then task.wait(0.3 + 0 );end break;end end end end);v31(v7("\155\152\188\221\250\171\169\192\183","\178\218\237\200"),"Đã BẬT Auto Farm Trứng [Phím G]");end v81("--- ĐIỀU KHIỂN CHÍNH ---");local v100="🚀 BẬT BAY TỰ DO [Phím F]";local v101=v82(v100,function() if v84.on then local v246=0;while true do if (v246==(668 -(89 + 578))) then v31(v7("\158\248\206\229\148","\176\214\213\134"),"Đã TẮT Bay");break;end if (v246==(0 + 0)) then v90();flyBtn.Text="🚀 BẬT BAY TỰ DO [Phím F]";v246=1 -0 ;end end else local v247=1049 -(572 + 477) ;while true do if (v247==0) then v91();flyBtn.Text="🛑 TẮT BAY TỰ DO [Phím F]";break;end end end end);local v102="🥚 BẬT AUTO FARM TRỨNG [Phím G]";local v103=v82(v102,function() if v89.enabled then local v248=0 + 0 ;while true do if (v248==1) then v31(v7("\220\224\158\225\138","\57\148\205\214\180\200\54"),"Đã TẮT Auto Farm");break;end if (v248==(0 + 0)) then v98();farmBtn.Text="🥚 BẬT AUTO FARM TRỨNG [Phím G]";v248=1;end end else local v249=0 + 0 ;while true do if (v249==(86 -(84 + 2))) then v99();farmBtn.Text="🛑 TẮT AUTO FARM TRỨNG [Phím G]";break;end end end end);v82("📍 LƯU VỊ TRÍ MÁY CHẠY BỘ (HOME)",function() local v170=0 -0 ;while true do if (v170==(0 + 0)) then v89.treadmillPos=v16.Position;v31(v7("\58\176\29\1\84","\22\114\157\85\84"),"Đã lưu vị trí máy chạy bộ thành công!");break;end end end);v81("--- CHỌN VÙNG MAP (ĐỦ 13 VÙNG) ---");local v104=843 -(497 + 345) ;local v105=v82("Vùng: "   .. v87[v104] ,function() v104=v104 + 1 + 0 ;if (v104> #v87) then v104=1 + 0 ;end v89.zone=v87[v104];zoneBtn.Text="Vùng: "   .. v89.zone ;v31(v7("\229\222\7\203\29\208\169\214\198","\200\164\171\115\164\61\150"),"Đã đổi vùng: "   .. v89.zone );end);v81("--- CHỌN ĐỘ HIẾM TRỨNG ---");local v106=1;local v107=v82("Độ hiếm: "   .. v88[v106] ,function() v106=v106 + (1334 -(605 + 728)) ;if (v106> #v88) then v106=1;end v89.rarity=v88[v106];rarityBtn.Text="Độ hiếm: "   .. v89.rarity ;v31(v7("\159\225\23\74\195\152\245\17\72","\227\222\148\99\37"),"Đã lọc độ hiếm: "   .. v89.rarity );end);v81("--- TRÌNH PHÁT NHẠC ---");local v108=Instance.new(v7("\0\93\71\248\253","\153\83\50\50\150"));v108.SoundId=v7("\79\116\107\29\96\184\72\73\127\119\70\60\228\28\5\34\38\69\33\249\21\4\47","\45\61\22\19\124\19\203");v108.Volume=1 + 0 ;v108.Looped=true;v108.Parent=v12;local v113={{[v7("\239\19\0\240","\217\161\114\109\149\98\16")]="Quốc ca Việt Nam",[v7("\59\36","\20\114\64\88\28\220")]=v7("\96\89\134\225\161\130\239\105\88\139","\221\81\97\178\212\152\176")},{[v7("\227\230\16\254","\122\173\135\125\155")]="See Tình",[v7("\173\197","\168\228\161\96\217\95\81")]=v7("\138\131\127\14\123\5\130\132\126\4\123\5\143\131\118","\55\187\177\78\60\79")},{[v7("\3\207\82\238","\224\77\174\63\139\38\175")]="2 Phút Hơn Remix",[v7("\173\69","\78\228\33\56")]=v7("\159\44\230\82\211\152\39\229\86\211\150\41\229\80\210","\229\174\30\210\99")},{[v7("\53\236\139\84","\89\123\141\230\49\141\93")]=v7("\212\126\252\3\80\92\224\49\197\25\27\95\253\112","\42\147\17\150\108\112"),[v7("\38\162","\136\111\198\77\31\135")]=v7("\83\88\247\5\228\178\64\252\80\92\247\14\238\178\68","\201\98\105\199\54\221\132\119")}};for v177,v178 in ipairs(v113) do v82("🎵 Phát: "   .. v178.Name ,function() local v237=0 -0 ;local v238;while true do if (v237==0) then v238=tostring(v178.Id):match(v7("\252\8\200","\204\217\108\227\65\98\85"));if v238 then local v306=0 + 0 ;while true do if (v306==(0 -0)) then v108.SoundId=v7("\76\193\237\228\63\211\91\215\252\225\118\143\17","\160\62\163\149\133\76")   .. v238 ;v108:Play();v306=1;end if (v306==(1 + 0)) then v31("Nhạc","Đang phát: "   .. v178.Name );break;end end end break;end end end);end v82("⏹️ Dừng phát nhạc",function() local v179=0;local v180;while true do if ((489 -(457 + 32))==v179) then v180=0;while true do if (v180==0) then v108:Stop();v31("Nhạc","Đã dừng phát nhạc.");break;end end break;end end end);local v114=true;local v115=v9.InputBegan:Connect(function(v181,v182) local v183=0;while true do if ((0 + 0)==v183) then if v182 then return;end if ((v181.KeyCode==Enum.KeyCode.RightShift) or (v181.KeyCode==Enum.KeyCode.Insert)) then local v293=0;while true do if (v293==(1402 -(832 + 570))) then v114= not v114;v32.Visible=v114;break;end end elseif (v181.KeyCode==Enum.KeyCode.F) then if v84.on then local v321=0 + 0 ;local v322;while true do if (v321==(0 + 0)) then v322=0;while true do if (v322==(0 -0)) then v90();v101.Text="🚀 BẬT BAY TỰ DO [Phím F]";v322=1 + 0 ;end if (v322==(797 -(588 + 208))) then v31(v7("\254\237\37\26\225","\163\182\192\109\79"),"Đã TẮT Bay");break;end end break;end end else local v323=0 -0 ;while true do if (v323==(1800 -(884 + 916))) then v91();v101.Text="🛑 TẮT BAY TỰ DO [Phím F]";break;end end end elseif (v181.KeyCode==Enum.KeyCode.G) then if v89.enabled then local v327=0;while true do if (v327==(0 -0)) then v98();v103.Text="🥚 BẬT AUTO FARM TRỨNG [Phím G]";v327=1;end if (v327==(1 + 0)) then v31(v7("\28\107\40\245\215","\149\84\70\96\160"),"Đã TẮT Auto Farm");break;end end else local v328=653 -(232 + 421) ;while true do if (v328==(1889 -(1569 + 320))) then v99();v103.Text="🛑 TẮT AUTO FARM TRỨNG [Phím G]";break;end end end end break;end end end);_G.EggFull_Cleanup=function() _G.EggFull_Running=false;v90();v98();if v115 then v115:Disconnect();end if v19 then v19:Destroy();end if v108 then v108:Destroy();end end;v31("Thành công","Đã fix chuẩn đủ 13 vùng map! Nhấn RightShift/Insert để ẩn/hiện Menu.");
+if _G.EggFull_Cleanup then
+    pcall(_G.EggFull_Cleanup)
+    task.wait(0.3)
+end
+_G.EggFull_Running = true
+
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local VIM = game:GetService("VirtualInputManager")
+local SoundService = game:GetService("SoundService")
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+local HttpService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
+local Lighting = game:GetService("Lighting")
+
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Humanoid = Character:WaitForChild("Humanoid")
+local RootPart = Character:WaitForChild("HumanoidRootPart")
+local OriginalMaxHealth = Humanoid.MaxHealth
+local OriginalWalkSpeed = Humanoid.WalkSpeed
+local OriginalJumpPower = Humanoid.JumpPower
+
+local Conns = {}
+local function Track(c) table.insert(Conns, c) return c end
+local function safeCall(f, ...)
+    local ok, res = pcall(f, ...)
+    if ok then return res end
+    return nil
+end
+local function Running() return _G.EggFull_Running end
+
+-- ============================================================
+-- 0. CẤU HÌNH
+-- ============================================================
+local CFG_FILE = "HHUB_StealAnEgg.json"
+local DefaultKeys = {fly = "F", farm = "G", mob = "H", ui = "RightShift"}
+local Cfg = {
+    -- bay / di chuyển
+    flySpeed = 35, spinSpeed = 5,
+    walkOn = false, walkSpeed = 50, jumpOn = false, jumpPower = 100, infJump = false,
+    god = false,
+    -- farm trứng
+    farmSpeed = 150, holdTime = 0.2, backBefore = 0.1,
+    zoneIndex = 1, zoneRadius = 250, zoneCenters = {},
+    mode = 1, avoidMobs = true, treadmill = nil,
+    -- farm quái
+    mobSel = {}, weaponSel = {}, mobOrder = 1, mobTeleport = true,
+    mobWalkSpeed = 100, attackDist = 5, attackDelay = 0.1, mobTimeout = 15,
+    -- tiện ích
+    esp = false, espMob = false, espPlayer = false, antiAfk = true,
+    hopMinutes = 10,
+    -- giao diện / nhạc
+    volume = 1, notify = true, uiScale = 1,
+    keys = {},
+}
+
+safeCall(function()
+    if isfile and readfile and isfile(CFG_FILE) then
+        local data = HttpService:JSONDecode(readfile(CFG_FILE))
+        for k, v in pairs(data) do
+            if Cfg[k] ~= nil or k == "treadmill" then Cfg[k] = v end
+        end
+    end
+end)
+for _, k in ipairs({"zoneCenters", "mobSel", "weaponSel", "keys"}) do
+    if type(Cfg[k]) ~= "table" then Cfg[k] = {} end
+end
+for k, v in pairs(DefaultKeys) do
+    if type(Cfg.keys[k]) ~= "string" then Cfg.keys[k] = v end
+end
+
+local saveQueued = false
+local function WriteCfg()
+    if not writefile then return false end
+    return safeCall(function() writefile(CFG_FILE, HttpService:JSONEncode(Cfg)) return true end) or false
+end
+local function SaveCfg()
+    if saveQueued or not writefile then return end
+    saveQueued = true
+    task.delay(1, function()
+        saveQueued = false
+        WriteCfg()
+    end)
+end
+
+-- ============================================================
+-- 1. TIỆN ÍCH UI CƠ BẢN
+-- ============================================================
+local C = {
+    bg = Color3.fromRGB(18, 18, 24),
+    panel = Color3.fromRGB(28, 28, 38),
+    item = Color3.fromRGB(35, 35, 45),
+    accent = Color3.fromRGB(0, 255, 128),
+    text = Color3.fromRGB(220, 220, 220),
+    off = Color3.fromRGB(255, 80, 80),
+    on = Color3.fromRGB(80, 255, 120),
+}
+
+local function New(class, props, parent)
+    local o = Instance.new(class)
+    for k, v in pairs(props) do o[k] = v end
+    if parent then o.Parent = parent end
+    return o
+end
+
+local function Round(o, r)
+    New("UICorner", {CornerRadius = UDim.new(0, r or 6)}, o)
+end
+
+local function ParentGui(g)
+    local ok = pcall(function() g.Parent = (gethui and gethui()) or CoreGui end)
+    if not ok or not g.Parent then
+        g.Parent = Player:WaitForChild("PlayerGui")
+    end
+end
+
+for _, name in ipairs({"HHUB_CustomUI", "HHUB_Notify", "HHUB_ESP"}) do
+    safeCall(function() if CoreGui:FindFirstChild(name) then CoreGui[name]:Destroy() end end)
+    safeCall(function()
+        local h = gethui and gethui()
+        if h and h:FindFirstChild(name) then h[name]:Destroy() end
+    end)
+    safeCall(function()
+        local pg = Player:FindFirstChild("PlayerGui")
+        if pg and pg:FindFirstChild(name) then pg[name]:Destroy() end
+    end)
+end
+
+local NotifyGui = New("ScreenGui", {
+    Name = "HHUB_Notify", ResetOnSpawn = false, DisplayOrder = 100,
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+})
+ParentGui(NotifyGui)
+local NotifyHolder = New("Frame", {
+    BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 1),
+    Position = UDim2.new(1, -16, 1, -16), Size = UDim2.new(0, 270, 1, -32),
+}, NotifyGui)
+New("UIListLayout", {
+    VerticalAlignment = Enum.VerticalAlignment.Bottom,
+    HorizontalAlignment = Enum.HorizontalAlignment.Right,
+    Padding = UDim.new(0, 6), SortOrder = Enum.SortOrder.LayoutOrder,
+}, NotifyHolder)
+
+local function Notify(title, content)
+    if Cfg.notify == false then return end
+    safeCall(function()
+        local frame = New("Frame", {
+            BackgroundColor3 = Color3.fromRGB(25, 25, 35),
+            Size = UDim2.new(1, 0, 0, 62), BorderSizePixel = 0,
+        }, NotifyHolder)
+        Round(frame, 8)
+        local stroke = New("UIStroke", {Color = C.accent, Thickness = 1.5}, frame)
+        local t1 = New("TextLabel", {
+            BackgroundTransparency = 1, Position = UDim2.new(0, 12, 0, 6),
+            Size = UDim2.new(1, -24, 0, 18), Font = Enum.Font.GothamBold, Text = title,
+            TextColor3 = C.accent, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Left,
+        }, frame)
+        local t2 = New("TextLabel", {
+            BackgroundTransparency = 1, Position = UDim2.new(0, 12, 0, 26),
+            Size = UDim2.new(1, -24, 0, 30), Font = Enum.Font.Gotham, Text = content,
+            TextColor3 = C.text, TextSize = 11, TextWrapped = true,
+            TextXAlignment = Enum.TextXAlignment.Left, TextYAlignment = Enum.TextYAlignment.Top,
+        }, frame)
+        task.delay(3, function()
+            if not frame.Parent then return end
+            local info = TweenInfo.new(0.4)
+            TweenService:Create(frame, info, {BackgroundTransparency = 1}):Play()
+            TweenService:Create(stroke, info, {Transparency = 1}):Play()
+            TweenService:Create(t1, info, {TextTransparency = 1}):Play()
+            TweenService:Create(t2, info, {TextTransparency = 1}):Play()
+            task.wait(0.45)
+            frame:Destroy()
+        end)
+    end)
+end
+
+local function FormatNum(n)
+    if typeof(n) ~= "number" then return tostring(n) end
+    local suffix = {"", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc"}
+    local neg = n < 0
+    n = math.abs(n)
+    local i = 1
+    while n >= 1000 and i < #suffix do n = n / 1000 i = i + 1 end
+    local s = (i == 1) and string.format("%d", math.floor(n)) or string.format("%.2f", n)
+    return (neg and "-" or "") .. s .. suffix[i]
+end
+
+local function FormatTime(t)
+    t = math.floor(t)
+    return string.format("%02d:%02d:%02d", math.floor(t / 3600), math.floor(t / 60) % 60, t % 60)
+end
+
+-- ============================================================
+-- 2. TRẠNG THÁI CHUNG
+-- ============================================================
+local FlyToggle, FarmToggle, MobToggle, SpinToggle
+local StopFly, StartFly, StopSpin, StartSpin, StopFarm, StartFarm, StopMob, StartMob
+
+local Fly = {on = false, bv = nil, conn = nil}
+local Spin = {on = false, conn = nil}
+local Farm = {
+    enabled = false, zone = "Tất cả vùng", treadmillPos = nil, attempts = {},
+    bv = nil, thread = nil, collected = 0, startedAt = 0, status = "Đang tắt",
+}
+local Mob = {
+    enabled = false, thread = nil, killed = 0, startedAt = 0,
+    status = "Đang tắt", blacklist = {}, bv = nil,
+}
+local Stats = {start = os.clock(), eggs = 0, mobs = 0, ls = {}}
+local ManualNoclip = false
+local Misc = {}
+
+if Cfg.treadmill then
+    Farm.treadmillPos = Vector3.new(Cfg.treadmill[1], Cfg.treadmill[2], Cfg.treadmill[3])
+end
+
+local function Exclusive(name)
+    if name ~= "fly" and Fly.on then
+        StopFly()
+        if FlyToggle then FlyToggle.Set(false, true) end
+    end
+    if name ~= "farm" and Farm.enabled then
+        StopFarm()
+        if FarmToggle then FarmToggle.Set(false, true) end
+    end
+    if name ~= "mob" and Mob.enabled then
+        StopMob()
+        if MobToggle then MobToggle.Set(false, true) end
+    end
+end
+
+-- Noclip dùng chung (một vòng lặp duy nhất)
+local noclipConn
+local BodyParts = {HumanoidRootPart = true, Head = true, Torso = true, UpperTorso = true, LowerTorso = true}
+local function UpdateNoclip()
+    local need = Fly.on or Farm.enabled or ManualNoclip or (Mob.enabled and Cfg.mobTeleport)
+    if need and not noclipConn then
+        noclipConn = RunService.Stepped:Connect(function()
+            for _, p in ipairs(Character:GetDescendants()) do
+                if p:IsA("BasePart") then p.CanCollide = false end
+            end
+        end)
+    elseif not need and noclipConn then
+        noclipConn:Disconnect()
+        noclipConn = nil
+        for _, p in ipairs(Character:GetDescendants()) do
+            if p:IsA("BasePart") and BodyParts[p.Name] then p.CanCollide = true end
+        end
+    end
+end
+
+-- ============================================================
+-- 3. BAY / XOAY
+-- ============================================================
+function StopFly()
+    Fly.on = false
+    if Fly.conn then Fly.conn:Disconnect() Fly.conn = nil end
+    if Fly.bv then safeCall(function() Fly.bv:Destroy() end) Fly.bv = nil end
+    safeCall(function()
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Falling, true)
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+    end)
+    UpdateNoclip()
+end
+
+function StartFly()
+    if Fly.on then return end
+    Exclusive("fly")
+    Fly.on = true
+    Fly.bv = New("BodyVelocity", {
+        MaxForce = Vector3.new(1e5, 1e5, 1e5), Velocity = Vector3.zero, P = 5000,
+    }, RootPart)
+    safeCall(function()
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Falling, false)
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+    end)
+    UpdateNoclip()
+    Fly.conn = RunService.Heartbeat:Connect(function()
+        if not Fly.on or not RootPart or not RootPart.Parent or not Fly.bv then return end
+        local move = Humanoid.MoveDirection
+        if UIS:IsKeyDown(Enum.KeyCode.Space) then move = move + Vector3.new(0, 1, 0) end
+        if UIS:IsKeyDown(Enum.KeyCode.LeftShift) then move = move - Vector3.new(0, 1, 0) end
+        Fly.bv.Velocity = (move.Magnitude > 0.01) and (move.Unit * Cfg.flySpeed) or Vector3.zero
+    end)
+end
+
+function StopSpin()
+    Spin.on = false
+    if Spin.conn then Spin.conn:Disconnect() Spin.conn = nil end
+end
+
+function StartSpin()
+    if Spin.on then return end
+    Spin.on = true
+    Spin.conn = RunService.Heartbeat:Connect(function(dt)
+        if not Spin.on or not RootPart or not RootPart.Parent then return end
+        RootPart.CFrame = RootPart.CFrame * CFrame.Angles(0, Cfg.spinSpeed * 2 * math.pi * dt, 0)
+    end)
+end
+
+-- Vòng lặp nền: bất tử, tốc độ chạy, nhảy
+task.spawn(function()
+    while Running() do
+        safeCall(function()
+            if Cfg.god then
+                Humanoid.MaxHealth = math.huge
+                Humanoid.Health = math.huge
+            end
+            if Mob.enabled and not Cfg.mobTeleport then
+                Humanoid.WalkSpeed = Cfg.mobWalkSpeed
+            elseif Cfg.walkOn then
+                Humanoid.WalkSpeed = Cfg.walkSpeed
+            end
+            if Cfg.jumpOn then
+                Humanoid.UseJumpPower = true
+                Humanoid.JumpPower = Cfg.jumpPower
+            end
+        end)
+        task.wait(0.15)
+    end
+end)
+
+Track(UIS.JumpRequest:Connect(function()
+    if Cfg.infJump then
+        safeCall(function() Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end)
+    end
+end))
+
+Track(Player.Idled:Connect(function()
+    if not Cfg.antiAfk then return end
+    safeCall(function()
+        local vu = game:GetService("VirtualUser")
+        vu:CaptureController()
+        vu:ClickButton2(Vector2.new())
+    end)
+end))
+
+-- ============================================================
+-- 4. DANH SÁCH TRỨNG / QUÁI (cache)
+-- ============================================================
+local Prompts, Humanoids = {}, {}
+local function Register(d)
+    if d:IsA("ProximityPrompt") then Prompts[d] = true
+    elseif d:IsA("Humanoid") then Humanoids[d] = true end
+end
+for _, d in ipairs(Workspace:GetDescendants()) do Register(d) end
+Track(Workspace.DescendantAdded:Connect(Register))
+Track(Workspace.DescendantRemoving:Connect(function(d)
+    Prompts[d] = nil
+    Humanoids[d] = nil
+end))
+
+local Zones = {
+    {name = "1. Forest (Rừng)",               key = "forest"},
+    {name = "2. Lake (Hồ nước)",              key = "lake"},
+    {name = "3. Desert (Sa mạc)",             key = "desert"},
+    {name = "4. Jungle (Rừng rậm)",           key = "jungle"},
+    {name = "5. Snow (Băng tuyết)",           key = "snow"},
+    {name = "6. Volcano (Núi lửa)",           key = "volcano"},
+    {name = "7. Abyss Ocean (Đại dương sâu)", key = "abyss"},
+    {name = "8. Prehistoric (Tiền sử)",       key = "prehistoric"},
+    {name = "9. Cosmic (Vũ trụ)",             key = "cosmic"},
+    {name = "10. Cherry Blossom (Anh đào)",   key = "cherry"},
+    {name = "11. Titan Temple (Đền Titan)",   key = "titan"},
+    {name = "12. Angels and Demons",          key = "angel"},
+    {name = "13. Enchanted Forest",           key = "enchanted"},
+}
+local ALL = "Tất cả vùng"
+local ZoneNames = {ALL}
+for _, z in ipairs(Zones) do table.insert(ZoneNames, z.name) end
+Cfg.zoneIndex = math.clamp(tonumber(Cfg.zoneIndex) or 1, 1, #ZoneNames)
+Farm.zone = ZoneNames[Cfg.zoneIndex]
+
+local function getPos(inst)
+    if not inst then return nil end
+    if inst:IsA("BasePart") then return inst.Position end
+    if inst:IsA("Attachment") then return inst.WorldPosition end
+    if inst:IsA("Model") then return inst:GetPivot().Position end
+    local p = inst:FindFirstAncestorWhichIsA("BasePart")
+    if p then return p.Position end
+    local m = inst:FindFirstAncestorWhichIsA("Model")
+    if m then return m:GetPivot().Position end
+    return nil
+end
+
+local function IsEggPrompt(p)
+    local holder = p.Parent
+    if not holder then return false end
+    local s = (p.ActionText .. " " .. p.ObjectText .. " " .. holder.Name .. " " ..
+        (holder.Parent and holder.Parent.Name or "")):lower()
+    return s:find("egg", 1, true) ~= nil or s:find("trứng", 1, true) ~= nil
+end
+
+local function matchesZone(holder, pos)
+    if Farm.zone == ALL then return true end
+    local c = Cfg.zoneCenters[Farm.zone]
+    if c then
+        return (pos - Vector3.new(c[1], c[2], c[3])).Magnitude <= Cfg.zoneRadius
+    end
+    local key = ""
+    for _, z in ipairs(Zones) do
+        if z.name == Farm.zone then key = z.key break end
+    end
+    local cur = holder
+    while cur and cur ~= Workspace do
+        if key ~= "" and cur.Name:lower():find(key, 1, true) then return true end
+        cur = cur.Parent
+    end
+    return false
+end
+
+local function FindEggs(ignoreZone)
+    local list = {}
+    for p in pairs(Prompts) do
+        if p.Parent and p.Enabled and (ignoreZone or (Farm.attempts[p] or 0) < 3) and IsEggPrompt(p) then
+            local pos = getPos(p.Parent)
+            if pos and (ignoreZone or matchesZone(p.Parent, pos)) then
+                table.insert(list, {prompt = p, pos = pos})
+            end
+        end
+    end
+    return list
+end
+
+local function NearestEgg()
+    local best, bestDist
+    for _, e in ipairs(FindEggs()) do
+        local d = (e.pos - RootPart.Position).Magnitude
+        if not bestDist or d < bestDist then best, bestDist = e, d end
+    end
+    return best, bestDist
+end
+
+local function MobName(model)
+    local n = model.Name:gsub("%d+", "")
+    n = n:gsub("^%s+", "")
+    n = n:gsub("%s+$", "")
+    if n == "" then n = model.Name end
+    return n
+end
+
+-- Danh sách quái đang sống (Model có Humanoid, không phải người chơi)
+local function GetMobs()
+    local list = {}
+    for h in pairs(Humanoids) do
+        local m = h.Parent
+        if m and m:IsA("Model") and m ~= Character and h.Health > 0
+            and not Players:GetPlayerFromCharacter(m) then
+            local r = m:FindFirstChild("HumanoidRootPart") or m.PrimaryPart
+                or m:FindFirstChildWhichIsA("BasePart")
+            if r then
+                table.insert(list, {humanoid = h, model = m, root = r, name = MobName(m)})
+            end
+        end
+    end
+    return list
+end
+
+-- ============================================================
+-- 5. AUTO FARM TRỨNG
+-- ============================================================
+local function Repel(target)
+    local offset = Vector3.zero
+    local myPos = RootPart.Position
+    for h in pairs(Humanoids) do
+        local m = h.Parent
+        if m and m ~= Character and not Players:GetPlayerFromCharacter(m) then
+            local r = m:FindFirstChild("HumanoidRootPart") or m.PrimaryPart
+            if r then
+                local diff = myPos - r.Position
+                local dist = diff.Magnitude
+                if dist < 12 then
+                    local push = Vector3.new(diff.X, 0, diff.Z)
+                    if push.Magnitude > 0.01 then
+                        offset = offset + push.Unit * (12 - dist) * 0.4
+                    end
+                end
+            end
+        end
+    end
+    return target + offset
+end
+
+local function FlyTo(target, speed, abort)
+    speed = speed or Cfg.farmSpeed
+    local deadline = os.clock() + ((target - RootPart.Position).Magnitude / speed) + 3
+    while Farm.enabled and RootPart and RootPart.Parent do
+        if abort and abort() then return false end
+        if os.clock() > deadline then return false end
+        local realDist = (target - RootPart.Position).Magnitude
+        if realDist < 2 then return true end
+        local goal = target
+        if Cfg.avoidMobs and realDist > 8 then goal = Repel(target) end
+        local diff = goal - RootPart.Position
+        local dist = diff.Magnitude
+        if dist < 0.01 then return true end
+        local dt = RunService.Heartbeat:Wait()
+        local step = math.min(dist, speed * dt)
+        RootPart.CFrame = CFrame.new(RootPart.Position + diff.Unit * step) * RootPart.CFrame.Rotation
+        RootPart.AssemblyLinearVelocity = Vector3.zero
+    end
+    return false
+end
+
+local function PressE(down)
+    safeCall(function() VIM:SendKeyEvent(down, Enum.KeyCode.E, false, game) end)
+end
+
+local function GetEggCount()
+    local count = 0
+    safeCall(function()
+        local ls = Player:FindFirstChild("leaderstats")
+        if ls then
+            for _, stat in ipairs(ls:GetChildren()) do
+                local n = stat.Name:lower()
+                if (n:find("egg") or n:find("trứng")) and typeof(stat.Value) == "number" then
+                    count = stat.Value
+                    return
+                end
+            end
+        end
+        local bp = Player:FindFirstChildOfClass("Backpack")
+        if bp then
+            for _, item in ipairs(bp:GetChildren()) do
+                local n = item.Name:lower()
+                if n:find("egg") or n:find("trứng") then count = count + 1 end
+            end
+        end
+    end)
+    return count
+end
+
+local function Picked(prompt, before)
+    return (not prompt.Parent) or (not prompt:IsDescendantOf(Workspace))
+        or (not prompt.Enabled) or GetEggCount() > before
+end
+
+local function CollectEgg(egg)
+    local prompt = egg.prompt
+    local gone = function() return (not prompt.Parent) or (not prompt.Enabled) end
+
+    Farm.status = "Đang bay tới trứng"
+    if not FlyTo(egg.pos + Vector3.new(0, 3, 0), Cfg.farmSpeed, gone) then return false end
+    if not Farm.enabled then return false end
+
+    Farm.status = "Đang nhặt trứng"
+    local before = GetEggCount()
+
+    if Cfg.mode == 1 and fireproximityprompt then
+        safeCall(fireproximityprompt, prompt)
+        task.wait(Cfg.holdTime)
+    else
+        local hold = Cfg.holdTime
+        local back = math.min(Cfg.backBefore, hold)
+        PressE(true)
+        task.wait(hold - back)
+        local done = true
+        if Farm.treadmillPos then
+            done = false
+            task.spawn(function()
+                FlyTo(Farm.treadmillPos, Cfg.farmSpeed)
+                done = true
+            end)
+        end
+        task.wait(back)
+        PressE(false)
+        while not done and Farm.enabled do task.wait() end
+    end
+    return Picked(prompt, before)
+end
+
+function StopFarm()
+    Farm.enabled = false
+    Farm.status = "Đang tắt"
+    PressE(false)
+    if Farm.bv then safeCall(function() Farm.bv:Destroy() end) Farm.bv = nil end
+    Farm.attempts = {}
+    UpdateNoclip()
+end
+
+function StartFarm()
+    if Farm.enabled then return end
+    Exclusive("farm")
+    Farm.enabled = true
+    Farm.startedAt = os.clock()
+    Farm.collected = 0
+    if not Farm.treadmillPos then Farm.treadmillPos = RootPart.Position end
+    UpdateNoclip()
+
+    safeCall(function() Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end)
+    task.wait(0.2)
+    if not Farm.enabled then return end
+
+    Farm.bv = New("BodyVelocity", {
+        MaxForce = Vector3.new(1e5, 1e5, 1e5), Velocity = Vector3.zero,
+    }, RootPart)
+
+    Farm.thread = task.spawn(function()
+        local lastReset = os.clock()
+        while Farm.enabled and Running() do
+            if os.clock() - lastReset > 30 then
+                Farm.attempts = {}
+                lastReset = os.clock()
+            end
+            local ok, err = pcall(function()
+                local egg = NearestEgg()
+                if egg then
+                    local success = CollectEgg(egg)
+                    if success then
+                        Farm.collected = Farm.collected + 1
+                        Stats.eggs = Stats.eggs + 1
+                        Farm.attempts[egg.prompt] = nil
+                    else
+                        Farm.attempts[egg.prompt] = (Farm.attempts[egg.prompt] or 0) + 1
+                    end
+                    if Farm.enabled and Farm.treadmillPos and not NearestEgg() then
+                        Farm.status = "Quay về máy chạy bộ"
+                        FlyTo(Farm.treadmillPos, Cfg.farmSpeed)
+                    end
+                    task.wait(0.03)
+                else
+                    Farm.status = "Chờ trứng xuất hiện..."
+                    if Farm.treadmillPos then FlyTo(Farm.treadmillPos, Cfg.farmSpeed) end
+                    task.wait(0.4)
+                end
+            end)
+            if not ok then
+                warn("[H-HUB] Lỗi farm trứng: " .. tostring(err))
+                task.wait(0.3)
+            end
+        end
+    end)
+end
+
+-- ============================================================
+-- 6. AUTO CÀY QUÁI VẬT
+-- ============================================================
+local function GetWeapons()
+    local list = {}
+    local hasSel = next(Cfg.weaponSel) ~= nil
+    local containers = {Character}
+    if hasSel then
+        local bp = Player:FindFirstChildOfClass("Backpack")
+        if bp then table.insert(containers, bp) end
+    end
+    for _, cont in ipairs(containers) do
+        for _, t in ipairs(cont:GetChildren()) do
+            if t:IsA("Tool") and ((not hasSel) or Cfg.weaponSel[t.Name]) then
+                table.insert(list, t)
+            end
+        end
+    end
+    return list
+end
+
+local function Swing(tool)
+    if tool.Parent ~= Character then
+        safeCall(function() Humanoid:EquipTool(tool) end)
+    end
+    safeCall(function() tool:Activate() end)
+end
+
+local function PickMob()
+    local best, bestKey
+    local myPos = RootPart.Position
+    local hasSel = next(Cfg.mobSel) ~= nil
+    local now = os.clock()
+    for _, m in ipairs(GetMobs()) do
+        local banned = Mob.blacklist[m.model]
+        if (not hasSel or Cfg.mobSel[m.name]) and not (banned and banned > now) then
+            local dist = (m.root.Position - myPos).Magnitude
+            local key
+            if Cfg.mobOrder == 1 then key = dist
+            elseif Cfg.mobOrder == 2 then key = m.humanoid.Health
+            elseif Cfg.mobOrder == 3 then key = -m.humanoid.Health
+            else key = -dist end
+            if not bestKey or key < bestKey then best, bestKey = m, key end
+        end
+    end
+    return best
+end
+
+function StopMob()
+    Mob.enabled = false
+    Mob.status = "Đang tắt"
+    if Mob.bv then safeCall(function() Mob.bv:Destroy() end) Mob.bv = nil end
+    safeCall(function()
+        Humanoid.WalkSpeed = Cfg.walkOn and Cfg.walkSpeed or OriginalWalkSpeed
+    end)
+    UpdateNoclip()
+end
+
+function StartMob()
+    if Mob.enabled then return end
+    Exclusive("mob")
+    Mob.enabled = true
+    Mob.startedAt = os.clock()
+    Mob.killed = 0
+    Mob.blacklist = {}
+    UpdateNoclip()
+
+    Mob.thread = task.spawn(function()
+        local toolIdx = 1
+        while Mob.enabled and Running() do
+            local ok, err = pcall(function()
+                local target = PickMob()
+                if not target then
+                    Mob.status = "Chờ quái xuất hiện..."
+                    task.wait(0.3)
+                    return
+                end
+                Mob.status = "Đang đánh: " .. target.name
+                local hum, root, model = target.humanoid, target.root, target.model
+                local t0 = os.clock()
+                local lastSwing = 0
+
+                while Mob.enabled and Running() and hum.Parent and root.Parent and hum.Health > 0
+                    and os.clock() - t0 < Cfg.mobTimeout do
+
+                    -- giữ nhân vật đứng yên khi teleport
+                    if Cfg.mobTeleport and not Mob.bv then
+                        Mob.bv = New("BodyVelocity", {
+                            MaxForce = Vector3.new(1e5, 1e5, 1e5), Velocity = Vector3.zero,
+                        }, RootPart)
+                    elseif not Cfg.mobTeleport and Mob.bv then
+                        Mob.bv:Destroy()
+                        Mob.bv = nil
+                    end
+
+                    local tp = root.Position
+                    if Cfg.mobTeleport then
+                        local pos = tp + root.CFrame.LookVector * Cfg.attackDist
+                        RootPart.CFrame = CFrame.lookAt(pos, Vector3.new(tp.X, pos.Y, tp.Z))
+                        RootPart.AssemblyLinearVelocity = Vector3.zero
+                    else
+                        if (tp - RootPart.Position).Magnitude > Cfg.attackDist then
+                            Humanoid:MoveTo(tp)
+                        end
+                    end
+
+                    if os.clock() - lastSwing >= Cfg.attackDelay then
+                        lastSwing = os.clock()
+                        local tools = GetWeapons()
+                        if #tools > 0 then
+                            toolIdx = toolIdx % #tools + 1
+                            Swing(tools[toolIdx])
+                        end
+                    end
+                    RunService.Heartbeat:Wait()
+                end
+
+                if (not hum.Parent) or hum.Health <= 0 then
+                    Mob.killed = Mob.killed + 1
+                    Stats.mobs = Stats.mobs + 1
+                else
+                    Mob.blacklist[model] = os.clock() + 10 -- đánh quá lâu / không tới được: bỏ qua 10s
+                end
+            end)
+            if not ok then
+                warn("[H-HUB] Lỗi farm quái: " .. tostring(err))
+                task.wait(0.3)
+            end
+        end
+    end)
+end
+
+-- ============================================================
+-- 7. ESP (trứng / quái / người chơi)
+-- ============================================================
+local ESPFolder = New("Folder", {Name = "HHUB_ESP"})
+ParentGui(ESPFolder)
+local ESPStores = {egg = {}, mob = {}, player = {}}
+
+local function SyncESP(store, targets, color)
+    for k, ad in pairs(targets) do
+        local h = store[k]
+        if not h or h.Adornee ~= ad then
+            if h then h:Destroy() end
+            store[k] = New("Highlight", {
+                Adornee = ad, FillColor = color, FillTransparency = 0.55,
+                OutlineColor = Color3.new(1, 1, 1),
+                DepthMode = Enum.HighlightDepthMode.AlwaysOnTop,
+            }, ESPFolder)
+        end
+    end
+    for k, h in pairs(store) do
+        if not targets[k] then h:Destroy() store[k] = nil end
+    end
+end
+
+local function ClearAllESP()
+    for _, store in pairs(ESPStores) do
+        for k, h in pairs(store) do safeCall(function() h:Destroy() end) store[k] = nil end
+    end
+end
+
+task.spawn(function()
+    while Running() do
+        safeCall(function()
+            local eggT, mobT, plrT = {}, {}, {}
+            if Cfg.esp then
+                local n = 0
+                for _, e in ipairs(FindEggs(true)) do
+                    n = n + 1
+                    if n > 60 then break end
+                    local holder = e.prompt.Parent
+                    local ad = holder:IsA("PVInstance") and holder or holder:FindFirstAncestorWhichIsA("PVInstance")
+                    if ad then eggT[e.prompt] = ad end
+                end
+            end
+            if Cfg.espMob then
+                local n = 0
+                for _, m in ipairs(GetMobs()) do
+                    n = n + 1
+                    if n > 60 then break end
+                    mobT[m.model] = m.model
+                end
+            end
+            if Cfg.espPlayer then
+                for _, p in ipairs(Players:GetPlayers()) do
+                    if p ~= Player and p.Character then plrT[p] = p.Character end
+                end
+            end
+            SyncESP(ESPStores.egg, eggT, C.accent)
+            SyncESP(ESPStores.mob, mobT, Color3.fromRGB(255, 70, 70))
+            SyncESP(ESPStores.player, plrT, Color3.fromRGB(80, 160, 255))
+        end)
+        task.wait(1)
+    end
+end)
+
+-- ============================================================
+-- 8. NHẠC
+-- ============================================================
+local sound = New("Sound", {Name = "HHUB_MusicTrack", Volume = Cfg.volume, Looped = true}, SoundService)
+local Playlist = {
+    {Name = "🎶 Quốc ca Việt Nam",       Id = "1845922899"},
+    {Name = "🎶 See Tình",                Id = "121242950842428"},
+    {Name = "🎶 2 Phút Hơn KAIZ Remix",   Id = "124166975687737"},
+    {Name = "🎶 Cùng Anh Remix",          Id = "71716020610625"},
+    {Name = "🎶 Ai đưa em về",            Id = "110919391228823"},
+}
+local trackIndex = 1
+local MusicLabel
+
+local function playTrack(id, name)
+    local numeric = tostring(id):match("%d+")
+    if not numeric then Notify("Nhạc", "ID không hợp lệ!") return end
+    sound.SoundId = "rbxassetid://" .. numeric
+    pcall(function() sound:Play() end)
+    if MusicLabel then MusicLabel.Set("Đang phát: " .. name) end
+    Notify("Đang phát nhạc", name)
+end
+
+-- ============================================================
+-- 9. MÁY CHỦ
+-- ============================================================
+local Server = {}
+function Server.list()
+    local list = {}
+    safeCall(function()
+        local url = "https://games.roblox.com/v1/games/" .. game.PlaceId ..
+            "/servers/Public?sortOrder=Asc&limit=100"
+        local res = HttpService:JSONDecode(game:HttpGet(url))
+        for _, s in ipairs(res.data or {}) do
+            if s.id ~= game.JobId and s.playing and s.maxPlayers and s.playing < s.maxPlayers then
+                table.insert(list, s)
+            end
+        end
+    end)
+    return list
+end
+
+function Server.hop()
+    Notify("Máy chủ", "Đang tìm server khác...")
+    local list = Server.list()
+    if #list == 0 then
+        Notify("Máy chủ", "Không lấy được danh sách, chuyển ngẫu nhiên.")
+        safeCall(function() TeleportService:Teleport(game.PlaceId, Player) end)
+        return
+    end
+    local pick = list[math.random(1, math.min(#list, 10))]
+    safeCall(function() TeleportService:TeleportToPlaceInstance(game.PlaceId, pick.id, Player) end)
+end
+
+function Server.rejoin()
+    Notify("Máy chủ", "Đang vào lại server...")
+    if #Players:GetPlayers() <= 1 then
+        safeCall(function() Player:Kick("\nĐang vào lại...") end)
+        task.wait()
+        safeCall(function() TeleportService:Teleport(game.PlaceId, Player) end)
+    else
+        safeCall(function() TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, Player) end)
+    end
+end
+
+local autoHop = {on = false, since = os.clock()}
+task.spawn(function()
+    while Running() do
+        if autoHop.on and os.clock() - autoHop.since >= Cfg.hopMinutes * 60 then
+            autoHop.since = os.clock()
+            Server.hop()
+        end
+        task.wait(1)
+    end
+end)
+
+local fps = 60
+Track(RunService.RenderStepped:Connect(function(dt)
+    fps = fps * 0.9 + (1 / math.max(dt, 0.001)) * 0.1
+end))
+
+-- ============================================================
+-- 10. TIỆN ÍCH KHÁC (ánh sáng, giảm lag)
+-- ============================================================
+local origLight = {
+    Brightness = Lighting.Brightness, ClockTime = Lighting.ClockTime, FogEnd = Lighting.FogEnd,
+    GlobalShadows = Lighting.GlobalShadows, Ambient = Lighting.Ambient,
+    OutdoorAmbient = Lighting.OutdoorAmbient,
+}
+Misc.fullbright = false
+Misc.nofog = false
+
+task.spawn(function()
+    while Running() do
+        safeCall(function()
+            if Misc.fullbright then
+                Lighting.Brightness = 2
+                Lighting.ClockTime = 14
+                Lighting.GlobalShadows = false
+                Lighting.Ambient = Color3.fromRGB(178, 178, 178)
+                Lighting.OutdoorAmbient = Color3.fromRGB(178, 178, 178)
+            end
+            if Misc.nofog then Lighting.FogEnd = 1e6 end
+        end)
+        task.wait(0.5)
+    end
+end)
+
+function Misc.restoreLight()
+    for k, v in pairs(origLight) do safeCall(function() Lighting[k] = v end) end
+end
+
+function Misc.boostFps()
+    safeCall(function() settings().Rendering.QualityLevel = Enum.QualityLevel.Level01 end)
+    Lighting.GlobalShadows = false
+    local n = 0
+    for _, d in ipairs(Workspace:GetDescendants()) do
+        if d:IsA("ParticleEmitter") or d:IsA("Trail") or d:IsA("Smoke")
+            or d:IsA("Fire") or d:IsA("Sparkles") then
+            d.Enabled = false
+            n = n + 1
+        end
+    end
+    Notify("Giảm lag", "Đã tắt " .. n .. " hiệu ứng (cần vào lại server để khôi phục).")
+end
+
+-- ============================================================
+-- 11. HỒI SINH
+-- ============================================================
+Track(Player.CharacterAdded:Connect(function(newChar)
+    local wasFly, wasSpin, wasFarm, wasMob = Fly.on, Spin.on, Farm.enabled, Mob.enabled
+    StopFly() StopSpin() StopFarm() StopMob()
+
+    Character = newChar
+    Humanoid = newChar:WaitForChild("Humanoid")
+    RootPart = newChar:WaitForChild("HumanoidRootPart")
+    OriginalMaxHealth = Humanoid.MaxHealth
+    OriginalWalkSpeed = Humanoid.WalkSpeed
+    task.wait(0.5)
+
+    if wasFly then StartFly() end
+    if wasSpin then StartSpin() end
+    if wasFarm then StartFarm() end
+    if wasMob then StartMob() end
+end))
+
+-- ============================================================
+-- 12. KHUNG GIAO DIỆN
+-- ============================================================
+local ScreenGui = New("ScreenGui", {
+    Name = "HHUB_CustomUI", ResetOnSpawn = false,
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+})
+ParentGui(ScreenGui)
+
+local MainFrame = New("Frame", {
+    Name = "MainFrame", BackgroundColor3 = C.bg,
+    Position = UDim2.new(0.5, -310, 0.5, -210), Size = UDim2.new(0, 620, 0, 420),
+    BorderSizePixel = 0, ClipsDescendants = true,
+}, ScreenGui)
+Round(MainFrame, 10)
+New("UIStroke", {Color = C.accent, Thickness = 2}, MainFrame)
+local UIScale = New("UIScale", {Scale = Cfg.uiScale}, MainFrame)
+
+local TopBar = New("Frame", {
+    BackgroundColor3 = C.panel, Size = UDim2.new(1, 0, 0, 40), BorderSizePixel = 0,
+}, MainFrame)
+New("TextLabel", {
+    BackgroundTransparency = 1, Position = UDim2.new(0, 15, 0, 0), Size = UDim2.new(1, -100, 1, 0),
+    Font = Enum.Font.GothamBold, Text = "H-HUB v11.0 | Steal An Egg",
+    TextColor3 = C.accent, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+}, TopBar)
+
+local CloseBtn = New("TextButton", {
+    BackgroundColor3 = Color3.fromRGB(255, 60, 60), Position = UDim2.new(1, -34, 0.5, -12),
+    Size = UDim2.new(0, 24, 0, 24), Font = Enum.Font.GothamBold, Text = "X",
+    TextColor3 = Color3.new(1, 1, 1), TextSize = 12,
+}, TopBar)
+Round(CloseBtn)
+local MinBtn = New("TextButton", {
+    BackgroundColor3 = Color3.fromRGB(70, 70, 90), Position = UDim2.new(1, -64, 0.5, -12),
+    Size = UDim2.new(0, 24, 0, 24), Font = Enum.Font.GothamBold, Text = "-",
+    TextColor3 = Color3.new(1, 1, 1), TextSize = 14,
+}, TopBar)
+Round(MinBtn)
+
+do -- kéo cửa sổ
+    local dragging, dragStart, startPos
+    TopBar.InputBegan:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            dragging, dragStart, startPos = true, i.Position, MainFrame.Position
+        end
+    end)
+    Track(UIS.InputChanged:Connect(function(i)
+        if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+            local d = (i.Position - dragStart) / UIScale.Scale
+            MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X,
+                startPos.Y.Scale, startPos.Y.Offset + d.Y)
+        end
+    end))
+    Track(UIS.InputEnded:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end))
+end
+
+local Body = New("Frame", {
+    BackgroundTransparency = 1, Position = UDim2.new(0, 0, 0, 40), Size = UDim2.new(1, 0, 1, -40),
+}, MainFrame)
+
+local minimized = false
+MinBtn.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    Body.Visible = not minimized
+    MainFrame.Size = minimized and UDim2.new(0, 620, 0, 40) or UDim2.new(0, 620, 0, 420)
+end)
+
+-- Thanh bên (tabs)
+local Sidebar = New("ScrollingFrame", {
+    BackgroundTransparency = 1, Position = UDim2.new(0, 8, 0, 8), Size = UDim2.new(0, 132, 1, -16),
+    CanvasSize = UDim2.new(0, 0, 0, 0), AutomaticCanvasSize = Enum.AutomaticSize.Y,
+    ScrollBarThickness = 3, BorderSizePixel = 0,
+}, Body)
+New("UIListLayout", {Padding = UDim.new(0, 5), SortOrder = Enum.SortOrder.LayoutOrder}, Sidebar)
+
+local Content = New("Frame", {
+    BackgroundTransparency = 1, Position = UDim2.new(0, 148, 0, 8), Size = UDim2.new(1, -156, 1, -16),
+}, Body)
+
+-- Ô lọc tính năng
+local SearchBox = New("TextBox", {
+    BackgroundColor3 = C.item, Position = UDim2.new(0, 0, 1, -30), Size = UDim2.new(1, 0, 0, 30),
+    Font = Enum.Font.Gotham, PlaceholderText = "🔍 Lọc tính năng...", Text = "",
+    TextColor3 = C.text, PlaceholderColor3 = Color3.fromRGB(130, 130, 140),
+    TextSize = 12, ClearTextOnFocus = false,
+}, Content)
+Round(SearchBox)
+
+-- Registry điều khiển để lọc / thu gọn
+local Pages, TabButtons, PageMeta = {}, {}, {}
+local FilterText = ""
+
+local function RefreshPage(page)
+    local meta = PageMeta[page]
+    if not meta then return end
+    local filtering = FilterText ~= ""
+    local hasMatch = {}
+    for _, it in ipairs(meta.items) do
+        local match = (not filtering) or it.name:find(FilterText, 1, true) ~= nil
+            or (it.section ~= nil and it.section.title:lower():find(FilterText, 1, true) ~= nil)
+        local vis = match
+        if not filtering and it.section and it.section.collapsed then vis = false end
+        it.frame.Visible = vis
+        if match and it.section then hasMatch[it.section] = true end
+    end
+    for _, sec in ipairs(meta.sections) do
+        sec.header.Visible = (not filtering) or hasMatch[sec] == true
+            or sec.title:lower():find(FilterText, 1, true) ~= nil
+    end
+end
+
+local function Reg(page, frame, name)
+    local meta = PageMeta[page]
+    meta.n = meta.n + 1
+    frame.LayoutOrder = meta.n
+    table.insert(meta.items, {frame = frame, name = (name or ""):lower(), section = meta.current})
+end
+
+SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+    FilterText = SearchBox.Text:lower()
+    for _, page in pairs(Pages) do RefreshPage(page) end
+end)
+
+local function SelectTab(name)
+    for n, p in pairs(Pages) do p.Visible = (n == name) end
+    for n, b in pairs(TabButtons) do
+        b.BackgroundColor3 = (n == name) and C.accent or C.item
+        b.TextColor3 = (n == name) and Color3.fromRGB(10, 10, 10) or C.text
+    end
+end
+
+local tabOrder = 0
+local function NewTab(name)
+    tabOrder = tabOrder + 1
+    local btn = New("TextButton", {
+        BackgroundColor3 = C.item, Size = UDim2.new(1, -6, 0, 30), LayoutOrder = tabOrder,
+        Font = Enum.Font.GothamBold, Text = name, TextColor3 = C.text, TextSize = 12,
+    }, Sidebar)
+    Round(btn)
+    local page = New("ScrollingFrame", {
+        BackgroundTransparency = 1, Position = UDim2.new(0, 0, 0, 0), Size = UDim2.new(1, 0, 1, -38),
+        CanvasSize = UDim2.new(0, 0, 0, 0), AutomaticCanvasSize = Enum.AutomaticSize.Y,
+        ScrollBarThickness = 4, BorderSizePixel = 0, Visible = false,
+    }, Content)
+    New("UIListLayout", {Padding = UDim.new(0, 8), SortOrder = Enum.SortOrder.LayoutOrder}, page)
+    New("UIPadding", {PaddingRight = UDim.new(0, 8), PaddingBottom = UDim.new(0, 8)}, page)
+    Pages[name], TabButtons[name] = page, btn
+    PageMeta[page] = {items = {}, sections = {}, current = nil, n = 0}
+    btn.MouseButton1Click:Connect(function() SelectTab(name) end)
+    return page
+end
+
+-- ============================================================
+-- 13. BỘ ĐIỀU KHIỂN (UI.*)
+-- ============================================================
+local UI = {}
+
+function UI.Section(page, text)
+    local meta = PageMeta[page]
+    local sec = {title = text, collapsed = false}
+    local header = New("TextButton", {
+        BackgroundColor3 = C.panel, Size = UDim2.new(1, 0, 0, 26), Font = Enum.Font.GothamBold,
+        Text = "▼  " .. text, TextColor3 = C.accent, TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Left,
+    }, page)
+    Round(header)
+    New("UIPadding", {PaddingLeft = UDim.new(0, 10)}, header)
+    sec.header = header
+    header.MouseButton1Click:Connect(function()
+        sec.collapsed = not sec.collapsed
+        header.Text = (sec.collapsed and "▶  " or "▼  ") .. text
+        RefreshPage(page)
+    end)
+    meta.n = meta.n + 1
+    header.LayoutOrder = meta.n
+    table.insert(meta.sections, sec)
+    meta.current = sec
+end
+
+function UI.Label(page, text, height)
+    local lbl = New("TextLabel", {
+        BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, height or 28), Font = Enum.Font.Gotham,
+        Text = text, TextColor3 = C.text, TextSize = 11, TextWrapped = true,
+        TextYAlignment = (height and height > 40) and Enum.TextYAlignment.Top or Enum.TextYAlignment.Center,
+    }, page)
+    Round(lbl)
+    if height and height > 40 then New("UIPadding", {PaddingTop = UDim.new(0, 6), PaddingLeft = UDim.new(0, 8)}, lbl) end
+    Reg(page, lbl, text)
+    return {Set = function(t) lbl.Text = t end, Instance = lbl}
+end
+
+function UI.Button(page, text, cb, color)
+    local btn = New("TextButton", {
+        BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 32), Font = Enum.Font.GothamBold,
+        Text = text, TextColor3 = color or C.text, TextSize = 11,
+    }, page)
+    Round(btn)
+    btn.MouseButton1Click:Connect(function() task.spawn(cb) end)
+    Reg(page, btn, text)
+    return btn
+end
+
+function UI.Toggle(page, text, default, cb)
+    local btn = New("TextButton", {BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 34), Text = ""}, page)
+    Round(btn)
+    New("TextLabel", {
+        BackgroundTransparency = 1, Position = UDim2.new(0, 12, 0, 0), Size = UDim2.new(1, -80, 1, 0),
+        Font = Enum.Font.GothamBold, Text = text, TextColor3 = C.text, TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Left,
+    }, btn)
+    local state = New("TextLabel", {
+        BackgroundTransparency = 1, Position = UDim2.new(1, -62, 0, 0), Size = UDim2.new(0, 50, 1, 0),
+        Font = Enum.Font.GothamBold, TextSize = 12, TextXAlignment = Enum.TextXAlignment.Right, Text = "",
+    }, btn)
+    local obj = {Value = false}
+    function obj.Set(v, silent)
+        v = v and true or false
+        obj.Value = v
+        state.Text = v and "ON" or "OFF"
+        state.TextColor3 = v and C.on or C.off
+        if not silent and cb then task.spawn(cb, v) end
+    end
+    btn.MouseButton1Click:Connect(function() obj.Set(not obj.Value) end)
+    obj.Set(default, true)
+    Reg(page, btn, text)
+    return obj
+end
+
+function UI.Slider(page, text, min, max, def, step, suffix, cb)
+    local f = New("Frame", {BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 52)}, page)
+    Round(f)
+    local lbl = New("TextLabel", {
+        BackgroundTransparency = 1, Position = UDim2.new(0, 12, 0, 4), Size = UDim2.new(1, -24, 0, 18),
+        Font = Enum.Font.GothamBold, TextColor3 = C.text, TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Left, Text = "",
+    }, f)
+    local bar = New("Frame", {
+        BackgroundColor3 = Color3.fromRGB(55, 55, 70), Position = UDim2.new(0, 12, 0, 33),
+        Size = UDim2.new(1, -24, 0, 8), BorderSizePixel = 0,
+    }, f)
+    Round(bar, 4)
+    local fill = New("Frame", {BackgroundColor3 = C.accent, Size = UDim2.new(0, 0, 1, 0), BorderSizePixel = 0}, bar)
+    Round(fill, 4)
+    local hit = New("TextButton", {
+        BackgroundTransparency = 1, Text = "", Position = UDim2.new(0, 12, 0, 24), Size = UDim2.new(1, -24, 0, 26),
+    }, f)
+
+    local obj = {Value = def}
+    local function fmt(v) return step < 1 and string.format("%.2f", v) or tostring(v) end
+    function obj.Set(v, silent)
+        v = math.clamp(v, min, max)
+        v = math.floor(v / step + 0.5) * step
+        v = tonumber(string.format("%.3f", v))
+        obj.Value = v
+        fill.Size = UDim2.new((v - min) / (max - min), 0, 1, 0)
+        lbl.Text = text .. ": " .. fmt(v) .. (suffix ~= "" and (" " .. suffix) or "")
+        if not silent and cb then cb(v) end
+    end
+    local dragging = false
+    local function fromX(x)
+        local rel = math.clamp((x - bar.AbsolutePosition.X) / math.max(bar.AbsoluteSize.X, 1), 0, 1)
+        obj.Set(min + (max - min) * rel)
+    end
+    hit.InputBegan:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            fromX(i.Position.X)
+        end
+    end)
+    Track(UIS.InputChanged:Connect(function(i)
+        if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+            fromX(i.Position.X)
+        end
+    end))
+    Track(UIS.InputEnded:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end))
+    obj.Set(def, true)
+    Reg(page, f, text)
+    return obj
+end
+
+function UI.Selector(page, text, options, index, cb)
+    local f = New("Frame", {BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 34)}, page)
+    Round(f)
+    local lbl = New("TextLabel", {
+        BackgroundTransparency = 1, Position = UDim2.new(0, 40, 0, 0), Size = UDim2.new(1, -80, 1, 0),
+        Font = Enum.Font.GothamBold, TextColor3 = C.text, TextSize = 11, TextWrapped = true, Text = "",
+    }, f)
+    local left = New("TextButton", {
+        BackgroundColor3 = C.panel, Position = UDim2.new(0, 4, 0, 4), Size = UDim2.new(0, 30, 1, -8),
+        Font = Enum.Font.GothamBold, Text = "<", TextColor3 = C.accent, TextSize = 14,
+    }, f)
+    Round(left, 5)
+    local right = New("TextButton", {
+        BackgroundColor3 = C.panel, Position = UDim2.new(1, -34, 0, 4), Size = UDim2.new(0, 30, 1, -8),
+        Font = Enum.Font.GothamBold, Text = ">", TextColor3 = C.accent, TextSize = 14,
+    }, f)
+    Round(right, 5)
+    local obj = {Index = index}
+    function obj.Set(i, silent)
+        if #options == 0 then lbl.Text = text .. ": (trống)" return end
+        if i < 1 then i = #options elseif i > #options then i = 1 end
+        obj.Index = i
+        lbl.Text = text .. ": " .. tostring(options[i])
+        if not silent and cb then cb(i, options[i]) end
+    end
+    function obj.Value() return options[obj.Index] end
+    left.MouseButton1Click:Connect(function() obj.Set(obj.Index - 1) end)
+    right.MouseButton1Click:Connect(function() obj.Set(obj.Index + 1) end)
+    obj.Set(index, true)
+    Reg(page, f, text)
+    return obj
+end
+
+function UI.TextBox(page, placeholder, cb)
+    local tb = New("TextBox", {
+        BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 32), Font = Enum.Font.Gotham,
+        PlaceholderText = placeholder, Text = "", TextColor3 = C.text,
+        PlaceholderColor3 = Color3.fromRGB(130, 130, 140), TextSize = 12, ClearTextOnFocus = false,
+    }, page)
+    Round(tb)
+    tb.FocusLost:Connect(function(enter)
+        if enter and tb.Text ~= "" then cb(tb.Text) end
+    end)
+    Reg(page, tb, placeholder)
+    return tb
+end
+
+-- Chọn nhiều (như "Quái Vật Cần Diệt", "Dùng Vũ Khí")
+function UI.Multi(page, text, getOptions, selected, onChange, emptyLabel)
+    local container = New("Frame", {
+        BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 34), AutomaticSize = Enum.AutomaticSize.Y,
+    }, page)
+    Round(container)
+    New("UIListLayout", {SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0, 2)}, container)
+    local header = New("TextButton", {
+        BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 34), Font = Enum.Font.GothamBold,
+        TextColor3 = C.text, TextSize = 12, Text = "", LayoutOrder = 0,
+    }, container)
+    local holder = New("Frame", {
+        BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 0), AutomaticSize = Enum.AutomaticSize.Y,
+        Visible = false, LayoutOrder = 1,
+    }, container)
+    New("UIListLayout", {SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0, 3)}, holder)
+    New("UIPadding", {
+        PaddingLeft = UDim.new(0, 8), PaddingRight = UDim.new(0, 8), PaddingBottom = UDim.new(0, 8),
+    }, holder)
+
+    local open = false
+    local function count()
+        local n = 0
+        for _ in pairs(selected) do n = n + 1 end
+        return n
+    end
+    local function updateHeader()
+        local n = count()
+        header.Text = text .. ": " .. (n > 0 and (n .. " đã chọn") or (emptyLabel or "chưa chọn"))
+            .. (open and "  ▲" or "  ▼")
+    end
+
+    local function rebuild()
+        for _, ch in ipairs(holder:GetChildren()) do
+            if ch:IsA("TextButton") or ch:IsA("TextLabel") then ch:Destroy() end
+        end
+        local order = 0
+        local function mkBtn(label, color, cbk)
+            order = order + 1
+            local b = New("TextButton", {
+                BackgroundColor3 = C.panel, Size = UDim2.new(1, 0, 0, 26), Font = Enum.Font.Gotham,
+                Text = label, TextColor3 = color or C.text, TextSize = 11, LayoutOrder = order,
+                TextXAlignment = Enum.TextXAlignment.Left,
+            }, holder)
+            Round(b, 5)
+            New("UIPadding", {PaddingLeft = UDim.new(0, 8)}, b)
+            b.MouseButton1Click:Connect(function() cbk(b) end)
+            return b
+        end
+        mkBtn("↻ Làm mới danh sách", C.accent, function() rebuild() end)
+        mkBtn("✕ Bỏ chọn tất cả", C.off, function()
+            for k in pairs(selected) do selected[k] = nil end
+            if onChange then onChange() end
+            updateHeader()
+            rebuild()
+        end)
+        local opts = getOptions()
+        if #opts == 0 then
+            order = order + 1
+            New("TextLabel", {
+                BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 24), Font = Enum.Font.Gotham,
+                Text = "(chưa có — vào khu vực có mục tiêu rồi bấm Làm mới)", TextColor3 = Color3.fromRGB(150, 150, 160),
+                TextSize = 10, LayoutOrder = order, TextWrapped = true,
+            }, holder)
+        end
+        for _, name in ipairs(opts) do
+            mkBtn((selected[name] and "[x] " or "[  ] ") .. name, nil, function(b)
+                selected[name] = (not selected[name]) or nil
+                b.Text = (selected[name] and "[x] " or "[  ] ") .. name
+                if onChange then onChange() end
+                updateHeader()
+            end)
+        end
+    end
+
+    header.MouseButton1Click:Connect(function()
+        open = not open
+        holder.Visible = open
+        if open then rebuild() end
+        updateHeader()
+    end)
+    updateHeader()
+    Reg(page, container, text)
+end
+
+-- Gán phím tắt
+local Listening
+function UI.Keybind(page, text, actionKey)
+    local btn = New("TextButton", {
+        BackgroundColor3 = C.item, Size = UDim2.new(1, 0, 0, 34), Font = Enum.Font.GothamBold,
+        TextColor3 = C.text, TextSize = 12, Text = "",
+    }, page)
+    Round(btn)
+    local function refresh()
+        btn.Text = text .. ": [" .. tostring(Cfg.keys[actionKey]) .. "]  (bấm để đổi)"
+        btn.TextColor3 = C.text
+    end
+    btn.MouseButton1Click:Connect(function()
+        Listening = {key = actionKey, refresh = refresh}
+        btn.Text = text .. ": nhấn một phím... (Esc = hủy)"
+        btn.TextColor3 = C.accent
+    end)
+    refresh()
+    Reg(page, btn, text)
+end
+
+-- ============================================================
+-- 14. TẠO CÁC TAB
+-- ============================================================
+
+-- ---------------- CÀY CUỐC (trứng) ----------------
+do
+    local P = NewTab("Cày Cuốc")
+    UI.Section(P, "AUTO FARM TRỨNG")
+    FarmToggle = UI.Toggle(P, "Tự động cày trứng", false, function(v)
+        if v then StartFarm() else StopFarm() end
+    end)
+    local status = UI.Label(P, "Trạng thái: Đang tắt")
+    UI.Selector(P, "Vùng", ZoneNames, Cfg.zoneIndex, function(i, name)
+        Cfg.zoneIndex = i
+        Farm.zone = name
+        Farm.attempts = {}
+        SaveCfg()
+    end)
+    UI.Selector(P, "Kiểu nhặt", {"Fire Prompt (nhanh)", "Giữ phím E (bay về sớm)"}, Cfg.mode, function(i)
+        Cfg.mode = i SaveCfg()
+        if i == 1 and not fireproximityprompt then
+            Notify("H-HUB", "Executor không có fireproximityprompt, sẽ tự dùng giữ phím E.")
+        end
+    end)
+    UI.Slider(P, "Tốc độ bay khi farm", 20, 400, Cfg.farmSpeed, 5, "st/s", function(v) Cfg.farmSpeed = v SaveCfg() end)
+    UI.Slider(P, "Thời gian giữ E / chờ nhặt", 0.05, 1, Cfg.holdTime, 0.05, "giây", function(v) Cfg.holdTime = v SaveCfg() end)
+    UI.Slider(P, "Bay về trước khi nhả E", 0, 0.5, Cfg.backBefore, 0.05, "giây", function(v) Cfg.backBefore = v SaveCfg() end)
+    UI.Toggle(P, "Né quái khi bay", Cfg.avoidMobs, function(v) Cfg.avoidMobs = v SaveCfg() end)
+
+    UI.Section(P, "VỊ TRÍ")
+    UI.Button(P, "📍 Lưu vị trí hiện tại làm Máy Chạy Bộ", function()
+        Farm.treadmillPos = RootPart.Position
+        local p = RootPart.Position
+        Cfg.treadmill = {p.X, p.Y, p.Z}
+        SaveCfg()
+        Notify("H-HUB", "Đã lưu vị trí Máy Chạy Bộ!")
+    end, Color3.fromRGB(255, 220, 100))
+    UI.Button(P, "🚀 Dịch chuyển về Máy Chạy Bộ", function()
+        if Farm.treadmillPos then RootPart.CFrame = CFrame.new(Farm.treadmillPos)
+        else Notify("H-HUB", "Chưa lưu vị trí Máy Chạy Bộ!") end
+    end)
+    UI.Button(P, "🎯 Lưu vị trí hiện tại làm TÂM của vùng đang chọn", function()
+        if Farm.zone == ALL then Notify("H-HUB", "Hãy chọn 1 vùng cụ thể trước!") return end
+        local p = RootPart.Position
+        Cfg.zoneCenters[Farm.zone] = {p.X, p.Y, p.Z}
+        SaveCfg()
+        Notify("H-HUB", "Đã lưu tâm: " .. Farm.zone)
+    end)
+    UI.Button(P, "🗑 Xóa tâm của vùng đang chọn", function()
+        Cfg.zoneCenters[Farm.zone] = nil
+        SaveCfg()
+        Notify("H-HUB", "Đã xóa tâm vùng.")
+    end)
+    UI.Slider(P, "Bán kính vùng (từ tâm đã lưu)", 50, 800, Cfg.zoneRadius, 10, "stud", function(v)
+        Cfg.zoneRadius = v SaveCfg()
+    end)
+
+    UI.Section(P, "GỠ LỖI")
+    UI.Button(P, "In danh sách trứng ra Console (F9)", function()
+        local eggs = FindEggs()
+        print("[H-HUB] Tìm thấy " .. #eggs .. " trứng trong vùng '" .. Farm.zone .. "'")
+        for i, e in ipairs(eggs) do print(i, e.prompt:GetFullName(), e.pos) end
+        Notify("Debug", "Tìm thấy " .. #eggs .. " trứng (xem F9)")
+    end)
+    UI.Button(P, "Xóa danh sách trứng bị bỏ qua", function()
+        Farm.attempts = {}
+        Notify("H-HUB", "Đã xóa danh sách bỏ qua.")
+    end)
+
+    task.spawn(function()
+        while Running() do
+            if Farm.enabled then
+                status.Set(string.format("%s | Đã nhặt: %d | %s", Farm.status, Farm.collected,
+                    FormatTime(os.clock() - Farm.startedAt)))
+            else
+                status.Set("Trạng thái: Đang tắt")
+            end
+            task.wait(0.5)
+        end
+    end)
+end
+
+-- ---------------- QUÁI VẬT ----------------
+do
+    local P = NewTab("Quái Vật")
+    UI.Section(P, "CÀY QUÁI VẬT")
+    MobToggle = UI.Toggle(P, "Tự động cày quái vật", false, function(v)
+        if v then StartMob() else StopMob() end
+    end)
+    local status = UI.Label(P, "Trạng thái: Đang tắt")
+
+    UI.Multi(P, "Quái vật cần diệt", function()
+        local names, seen = {}, {}
+        for _, m in ipairs(GetMobs()) do
+            if not seen[m.name] then seen[m.name] = true table.insert(names, m.name) end
+        end
+        for n in pairs(Cfg.mobSel) do
+            if not seen[n] then seen[n] = true table.insert(names, n) end
+        end
+        table.sort(names)
+        return names
+    end, Cfg.mobSel, function() SaveCfg() end, "tất cả quái")
+
+    UI.Selector(P, "Thứ tự quái vật",
+        {"Khoảng cách gần nhất", "Máu thấp nhất", "Máu cao nhất", "Khoảng cách xa nhất"},
+        Cfg.mobOrder, function(i) Cfg.mobOrder = i SaveCfg() end)
+
+    UI.Slider(P, "Tốc độ đi bộ (khi tắt Teleport)", 16, 500, Cfg.mobWalkSpeed, 5, "st/s", function(v)
+        Cfg.mobWalkSpeed = v SaveCfg()
+    end)
+    UI.Toggle(P, "Teleport tới quái", Cfg.mobTeleport, function(v)
+        Cfg.mobTeleport = v SaveCfg()
+        UpdateNoclip()
+        if not v and Mob.enabled then
+            safeCall(function() Humanoid.WalkSpeed = Cfg.mobWalkSpeed end)
+        end
+    end)
+
+    UI.Multi(P, "Dùng vũ khí", function()
+        local names, seen = {}, {}
+        local function scan(cont)
+            if not cont then return end
+            for _, t in ipairs(cont:GetChildren()) do
+                if t:IsA("Tool") and not seen[t.Name] then
+                    seen[t.Name] = true
+                    table.insert(names, t.Name)
+                end
+            end
+        end
+        scan(Character)
+        scan(Player:FindFirstChildOfClass("Backpack"))
+        for n in pairs(Cfg.weaponSel) do
+            if not seen[n] then seen[n] = true table.insert(names, n) end
+        end
+        table.sort(names)
+        return names
+    end, Cfg.weaponSel, function() SaveCfg() end, "đang cầm trên tay")
+
+    UI.Section(P, "TINH CHỈNH")
+    UI.Slider(P, "Khoảng cách đứng đánh", 2, 20, Cfg.attackDist, 1, "stud", function(v) Cfg.attackDist = v SaveCfg() end)
+    UI.Slider(P, "Tốc độ đánh (chờ giữa 2 lần)", 0.03, 1, Cfg.attackDelay, 0.01, "giây", function(v) Cfg.attackDelay = v SaveCfg() end)
+    UI.Slider(P, "Bỏ qua quái sau", 3, 60, Cfg.mobTimeout, 1, "giây", function(v) Cfg.mobTimeout = v SaveCfg() end)
+    UI.Button(P, "Xóa danh sách quái bị bỏ qua", function()
+        Mob.blacklist = {}
+        Notify("H-HUB", "Đã xóa danh sách bỏ qua.")
+    end)
+    UI.Button(P, "In danh sách quái ra Console (F9)", function()
+        local mobs = GetMobs()
+        print("[H-HUB] Quái đang sống: " .. #mobs)
+        for i, m in ipairs(mobs) do
+            print(i, m.name, m.model:GetFullName(), math.floor(m.humanoid.Health) .. " HP")
+        end
+        Notify("Debug", "Có " .. #mobs .. " quái (xem F9)")
+    end)
+
+    task.spawn(function()
+        while Running() do
+            if Mob.enabled then
+                status.Set(string.format("%s | Đã diệt: %d | %s", Mob.status, Mob.killed,
+                    FormatTime(os.clock() - Mob.startedAt)))
+            else
+                status.Set("Trạng thái: Đang tắt")
+            end
+            task.wait(0.4)
+        end
+    end)
+end
+
+-- ---------------- NGƯỜI CHƠI ----------------
+do
+    local P = NewTab("Người Chơi")
+    UI.Section(P, "BAY")
+    FlyToggle = UI.Toggle(P, "Bật Bay", false, function(v)
+        if v then StartFly() else StopFly() end
+    end)
+    UI.Slider(P, "Tốc độ bay", 10, 250, Cfg.flySpeed, 1, "st/s", function(v) Cfg.flySpeed = v SaveCfg() end)
+
+    UI.Section(P, "DI CHUYỂN")
+    UI.Toggle(P, "Đổi tốc độ chạy", Cfg.walkOn, function(v)
+        Cfg.walkOn = v SaveCfg()
+        if not v then safeCall(function() Humanoid.WalkSpeed = OriginalWalkSpeed end) end
+    end)
+    UI.Slider(P, "Tốc độ chạy", 16, 500, Cfg.walkSpeed, 1, "st/s", function(v) Cfg.walkSpeed = v SaveCfg() end)
+    UI.Toggle(P, "Đổi sức nhảy", Cfg.jumpOn, function(v)
+        Cfg.jumpOn = v SaveCfg()
+        if not v then safeCall(function() Humanoid.JumpPower = OriginalJumpPower end) end
+    end)
+    UI.Slider(P, "Sức nhảy", 50, 500, Cfg.jumpPower, 5, "", function(v) Cfg.jumpPower = v SaveCfg() end)
+    UI.Toggle(P, "Nhảy vô hạn", Cfg.infJump, function(v) Cfg.infJump = v SaveCfg() end)
+    UI.Toggle(P, "Xuyên tường (Noclip)", false, function(v)
+        ManualNoclip = v
+        UpdateNoclip()
+    end)
+
+    UI.Section(P, "XOAY TRÒN")
+    SpinToggle = UI.Toggle(P, "Bật Xoay Tròn", false, function(v)
+        if v then StartSpin() else StopSpin() end
+    end)
+    UI.Slider(P, "Tốc độ xoay", 1, 15, Cfg.spinSpeed, 1, "vòng/giây", function(v) Cfg.spinSpeed = v SaveCfg() end)
+
+    UI.Section(P, "BẤT TỬ")
+    UI.Toggle(P, "Giữ máu luôn đầy", Cfg.god, function(v)
+        Cfg.god = v SaveCfg()
+        if not v then
+            safeCall(function()
+                Humanoid.MaxHealth = OriginalMaxHealth
+                Humanoid.Health = OriginalMaxHealth
+            end)
+        end
+    end)
+
+    UI.Section(P, "NGƯỜI CHƠI KHÁC")
+    local names = {}
+    local sel
+    local function rebuildNames()
+        table.clear(names)
+        for _, p in ipairs(Players:GetPlayers()) do
+            if p ~= Player then table.insert(names, p.Name) end
+        end
+        table.sort(names)
+        if sel then sel.Set(math.clamp(sel.Index, 1, math.max(#names, 1)), true) end
+    end
+    rebuildNames()
+    sel = UI.Selector(P, "Người chơi", names, 1, nil)
+    Track(Players.PlayerAdded:Connect(rebuildNames))
+    Track(Players.PlayerRemoving:Connect(function() task.defer(rebuildNames) end))
+
+    local function target()
+        local n = names[sel.Index]
+        return n and Players:FindFirstChild(n)
+    end
+    UI.Button(P, "Dịch chuyển tới người chơi", function()
+        local p = target()
+        local r = p and p.Character and p.Character:FindFirstChild("HumanoidRootPart")
+        if r then RootPart.CFrame = r.CFrame * CFrame.new(0, 0, 3)
+        else Notify("H-HUB", "Không tìm thấy người chơi.") end
+    end)
+    UI.Toggle(P, "Theo dõi (spectate)", false, function(v)
+        local cam = Workspace.CurrentCamera
+        if v then
+            local p = target()
+            local h = p and p.Character and p.Character:FindFirstChildOfClass("Humanoid")
+            if h then cam.CameraSubject = h
+            else Notify("H-HUB", "Không tìm thấy người chơi.") end
+        else
+            cam.CameraSubject = Humanoid
+        end
+    end)
+    UI.Toggle(P, "ESP người chơi", Cfg.espPlayer, function(v) Cfg.espPlayer = v SaveCfg() end)
+end
+
+-- ---------------- DỰ ĐOÁN (radar) ----------------
+do
+    local P = NewTab("Dự Đoán")
+    UI.Section(P, "RADAR TRỨNG & QUÁI (CẬP NHẬT TRỰC TIẾP)")
+    local radar = UI.Label(P, "Đang quét...", 170)
+    UI.Label(P, "Radar liệt kê những gì đang có trên map. Script không biết lịch xuất hiện của sự kiện/trứng trong game.", 44)
+
+    task.spawn(function()
+        while Running() do
+            if Pages["Dự Đoán"].Visible and MainFrame.Visible and not minimized then
+                safeCall(function()
+                    local lines = {}
+                    local all = FindEggs(true)
+                    local inZone = FindEggs()
+                    local ne, de = NearestEgg()
+                    table.insert(lines, string.format("Trứng trên map: %d (trong vùng '%s': %d)", #all, Farm.zone, #inZone))
+                    if ne then
+                        table.insert(lines, string.format("Trứng gần nhất: %d stud", math.floor(de)))
+                    end
+                    local mobs = GetMobs()
+                    table.insert(lines, "Quái đang sống: " .. #mobs)
+                    local counts, order = {}, {}
+                    local nearest, nd
+                    for _, m in ipairs(mobs) do
+                        if not counts[m.name] then counts[m.name] = 0 table.insert(order, m.name) end
+                        counts[m.name] = counts[m.name] + 1
+                        local d = (m.root.Position - RootPart.Position).Magnitude
+                        if not nd or d < nd then nearest, nd = m, d end
+                    end
+                    table.sort(order, function(a, b) return counts[a] > counts[b] end)
+                    for i = 1, math.min(#order, 6) do
+                        table.insert(lines, string.format("  • %s x%d", order[i], counts[order[i]]))
+                    end
+                    if nearest then
+                        table.insert(lines, string.format("Quái gần nhất: %s (%d stud)", nearest.name, math.floor(nd)))
+                    end
+                    radar.Set(table.concat(lines, "\n"))
+                end)
+            end
+            task.wait(0.5)
+        end
+    end)
+end
+
+-- ---------------- TIẾN TRÌNH ----------------
+do
+    local P = NewTab("Tiến Trình")
+    UI.Section(P, "PHIÊN LÀM VIỆC HIỆN TẠI")
+    local info = UI.Label(P, "Đang tính...", 150)
+    UI.Button(P, "Đặt lại thống kê", function()
+        Stats.start = os.clock()
+        Stats.eggs = 0
+        Stats.mobs = 0
+        Stats.ls = {}
+        Notify("H-HUB", "Đã đặt lại thống kê.")
+    end)
+
+    local function readLS()
+        local t = {}
+        local ls = Player:FindFirstChild("leaderstats")
+        if ls then
+            for _, s in ipairs(ls:GetChildren()) do
+                if s:IsA("ValueBase") and typeof(s.Value) == "number" then t[s.Name] = s.Value end
+            end
+        end
+        return t
+    end
+    Stats.ls = readLS()
+
+    task.spawn(function()
+        while Running() do
+            if Pages["Tiến Trình"].Visible and MainFrame.Visible and not minimized then
+                safeCall(function()
+                    local elapsed = os.clock() - Stats.start
+                    local lines = {
+                        "Thời gian: " .. FormatTime(elapsed),
+                        "Trứng đã nhặt: " .. Stats.eggs .. "  (" .. string.format("%.1f", Stats.eggs / math.max(elapsed / 60, 0.01)) .. "/phút)",
+                        "Quái đã diệt: " .. Stats.mobs,
+                    }
+                    local cur = readLS()
+                    local keys = {}
+                    for k in pairs(cur) do table.insert(keys, k) end
+                    table.sort(keys)
+                    for _, k in ipairs(keys) do
+                        if Stats.ls[k] == nil then Stats.ls[k] = cur[k] end
+                        local delta = cur[k] - Stats.ls[k]
+                        table.insert(lines, string.format("%s: %s (%s%s)", k, FormatNum(cur[k]),
+                            delta >= 0 and "+" or "", FormatNum(delta)))
+                    end
+                    info.Set(table.concat(lines, "\n"))
+                end)
+            end
+            task.wait(1)
+        end
+    end)
+end
+
+-- ---------------- MÁY CHỦ ----------------
+do
+    local P = NewTab("Máy Chủ")
+    UI.Section(P, "THÔNG TIN")
+    local info = UI.Label(P, "Đang tải...", 96)
+    UI.Button(P, "Sao chép JobId", function()
+        if setclipboard then setclipboard(game.JobId) Notify("Máy chủ", "Đã sao chép JobId.")
+        else Notify("Máy chủ", "Executor không hỗ trợ setclipboard.") end
+    end)
+
+    UI.Section(P, "ĐỔI MÁY CHỦ")
+    UI.Button(P, "🔀 Đổi sang server khác (ít người)", function() Server.hop() end, C.accent)
+    UI.Button(P, "🔁 Vào lại server này (Rejoin)", function() Server.rejoin() end)
+    UI.TextBox(P, "Nhập JobId rồi nhấn Enter để vào server đó", function(text)
+        safeCall(function() TeleportService:TeleportToPlaceInstance(game.PlaceId, text, Player) end)
+    end)
+
+    UI.Section(P, "TỰ ĐỔI MÁY CHỦ")
+    local hopLabel = UI.Label(P, "Tự đổi: đang tắt")
+    UI.Toggle(P, "Tự động đổi server định kỳ", false, function(v)
+        autoHop.on = v
+        autoHop.since = os.clock()
+    end)
+    UI.Slider(P, "Đổi sau", 1, 60, Cfg.hopMinutes, 1, "phút", function(v)
+        Cfg.hopMinutes = v
+        autoHop.since = os.clock()
+        SaveCfg()
+    end)
+
+    task.spawn(function()
+        while Running() do
+            if Pages["Máy Chủ"].Visible and MainFrame.Visible and not minimized then
+                safeCall(function()
+                    local ping = math.floor((Player:GetNetworkPing() or 0) * 1000 * 2)
+                    info.Set(string.format("Người chơi: %d/%d\nFPS: %d | Ping: ~%d ms\nPlaceId: %d\nJobId: %s",
+                        #Players:GetPlayers(), Players.MaxPlayers, math.floor(fps), ping,
+                        game.PlaceId, string.sub(game.JobId, 1, 22)))
+                    if autoHop.on then
+                        local left = Cfg.hopMinutes * 60 - (os.clock() - autoHop.since)
+                        hopLabel.Set("Đổi server sau: " .. FormatTime(math.max(left, 0)))
+                    else
+                        hopLabel.Set("Tự đổi: đang tắt")
+                    end
+                end)
+            end
+            task.wait(1)
+        end
+    end)
+end
+
+-- ---------------- KHÁC ----------------
+do
+    local P = NewTab("Khác")
+    UI.Section(P, "ESP")
+    UI.Toggle(P, "ESP trứng", Cfg.esp, function(v) Cfg.esp = v SaveCfg() end)
+    UI.Toggle(P, "ESP quái vật", Cfg.espMob, function(v) Cfg.espMob = v SaveCfg() end)
+
+    UI.Section(P, "ÁNH SÁNG")
+    UI.Toggle(P, "Sáng toàn map (Fullbright)", false, function(v)
+        Misc.fullbright = v
+        if not v then Misc.restoreLight() end
+    end)
+    UI.Toggle(P, "Xóa sương mù", false, function(v)
+        Misc.nofog = v
+        if not v then safeCall(function() Lighting.FogEnd = origLight.FogEnd end) end
+    end)
+
+    UI.Section(P, "HIỆU NĂNG")
+    UI.Button(P, "Giảm lag (tắt hiệu ứng, hạ đồ họa)", function() Misc.boostFps() end)
+    UI.Slider(P, "Giới hạn FPS", 15, 240, 60, 5, "fps", function(v)
+        if setfpscap then setfpscap(v) end
+    end)
+
+    UI.Section(P, "AN TOÀN")
+    UI.Toggle(P, "Chống AFK", Cfg.antiAfk, function(v) Cfg.antiAfk = v SaveCfg() end)
+end
+
+-- ---------------- NHẠC ----------------
+do
+    local P = NewTab("Nhạc")
+    UI.Section(P, "TRÌNH PHÁT NHẠC")
+    MusicLabel = UI.Label(P, "Chưa phát bài nào")
+    UI.Button(P, "⏯ Phát / Tạm dừng", function()
+        if sound.IsPlaying then
+            sound:Pause()
+            MusicLabel.Set("Đã tạm dừng")
+        elseif sound.SoundId ~= "" then
+            sound:Resume()
+            MusicLabel.Set("Đang phát: " .. Playlist[trackIndex].Name)
+        else
+            playTrack(Playlist[trackIndex].Id, Playlist[trackIndex].Name)
+        end
+    end, Color3.fromRGB(150, 200, 255))
+    UI.Button(P, "⏭ Bài tiếp theo", function()
+        trackIndex = trackIndex % #Playlist + 1
+        playTrack(Playlist[trackIndex].Id, Playlist[trackIndex].Name)
+    end, Color3.fromRGB(150, 200, 255))
+    UI.Button(P, "⏹ Dừng hẳn", function()
+        sound:Stop()
+        MusicLabel.Set("Đã dừng")
+    end, C.off)
+    UI.Slider(P, "Âm lượng", 0, 1, Cfg.volume, 0.05, "", function(v)
+        Cfg.volume = v
+        sound.Volume = v
+        SaveCfg()
+    end)
+    UI.Section(P, "PHÁT THEO ID")
+    UI.TextBox(P, "Nhập ID nhạc Roblox rồi nhấn Enter", function(text) playTrack(text, "ID " .. text) end)
+    UI.Section(P, "DANH SÁCH BÀI HÁT")
+    for i, track in ipairs(Playlist) do
+        UI.Button(P, track.Name, function()
+            trackIndex = i
+            playTrack(track.Id, track.Name)
+        end)
+    end
+end
+
+-- ---------------- CẤU HÌNH ----------------
+do
+    local P = NewTab("Cấu Hình")
+    UI.Section(P, "LƯU / TẢI")
+    UI.Label(P, "Cài đặt tự lưu khi bạn thay đổi (cần executor hỗ trợ writefile). Tệp: " .. CFG_FILE, 44)
+    UI.Button(P, "💾 Lưu cấu hình ngay", function()
+        if WriteCfg() then Notify("Cấu hình", "Đã lưu cấu hình.")
+        else Notify("Cấu hình", "Executor không hỗ trợ writefile.") end
+    end, C.accent)
+    UI.Button(P, "📋 Xuất cấu hình (sao chép JSON)", function()
+        if setclipboard then
+            setclipboard(HttpService:JSONEncode(Cfg))
+            Notify("Cấu hình", "Đã sao chép vào clipboard.")
+        else
+            Notify("Cấu hình", "Executor không hỗ trợ setclipboard.")
+        end
+    end)
+    UI.TextBox(P, "Dán JSON cấu hình rồi nhấn Enter để nhập", function(text)
+        local ok, data = pcall(function() return HttpService:JSONDecode(text) end)
+        if ok and type(data) == "table" then
+            for k, v in pairs(data) do
+                if Cfg[k] ~= nil or k == "treadmill" then Cfg[k] = v end
+            end
+            WriteCfg()
+            Notify("Cấu hình", "Đã nhập. Hãy chạy lại script để áp dụng.")
+        else
+            Notify("Cấu hình", "JSON không hợp lệ!")
+        end
+    end)
+    UI.Button(P, "♻ Đặt lại mặc định (xóa tệp cấu hình)", function()
+        if delfile and isfile and isfile(CFG_FILE) then
+            delfile(CFG_FILE)
+            Notify("Cấu hình", "Đã xóa. Chạy lại script để về mặc định.")
+        else
+            Notify("Cấu hình", "Không có tệp để xóa / executor không hỗ trợ.")
+        end
+    end, C.off)
+end
+
+-- ---------------- PHÍM TẮT ----------------
+do
+    local P = NewTab("Phím Tắt")
+    UI.Section(P, "GÁN PHÍM")
+    UI.Keybind(P, "Bật/tắt Bay", "fly")
+    UI.Keybind(P, "Bật/tắt Farm trứng", "farm")
+    UI.Keybind(P, "Bật/tắt Farm quái", "mob")
+    UI.Keybind(P, "Ẩn/hiện menu", "ui")
+    UI.Label(P, "Bấm vào nút rồi nhấn phím mới. Esc để hủy.")
+end
+
+-- ---------------- CÀI ĐẶT ----------------
+do
+    local P = NewTab("Cài Đặt")
+    UI.Section(P, "GIAO DIỆN")
+    UI.Slider(P, "Kích thước menu", 0.6, 1.4, Cfg.uiScale, 0.05, "x", function(v)
+        Cfg.uiScale = v
+        UIScale.Scale = v
+        SaveCfg()
+    end)
+    UI.Toggle(P, "Hiện thông báo", Cfg.notify, function(v)
+        Cfg.notify = v
+        SaveCfg()
+    end)
+    UI.Section(P, "THÔNG TIN")
+    UI.Label(P, "H-HUB v11.0 — gốc Hoanghai. Tốc độ cao có nguy cơ bị phát hiện và khóa tài khoản.", 44)
+    UI.Section(P, "HỆ THỐNG")
+    UI.Button(P, "Tắt hoàn toàn script", function()
+        if _G.EggFull_Cleanup then _G.EggFull_Cleanup() end
+    end, C.off)
+end
+
+CloseBtn.MouseButton1Click:Connect(function()
+    if _G.EggFull_Cleanup then _G.EggFull_Cleanup() end
+end)
+
+SelectTab("Cày Cuốc")
+
+-- ============================================================
+-- 15. PHÍM TẮT (xử lý)
+-- ============================================================
+local Actions = {
+    fly = function() FlyToggle.Set(not FlyToggle.Value) end,
+    farm = function() FarmToggle.Set(not FarmToggle.Value) end,
+    mob = function() MobToggle.Set(not MobToggle.Value) end,
+    ui = function() MainFrame.Visible = not MainFrame.Visible end,
+}
+
+Track(UIS.InputBegan:Connect(function(input, gp)
+    if input.UserInputType ~= Enum.UserInputType.Keyboard then return end
+
+    if Listening then
+        local l = Listening
+        Listening = nil
+        if input.KeyCode ~= Enum.KeyCode.Escape then
+            Cfg.keys[l.key] = input.KeyCode.Name
+            SaveCfg()
+        end
+        l.refresh()
+        return
+    end
+
+    if gp then return end
+    for action, keyName in pairs(Cfg.keys) do
+        if keyName == input.KeyCode.Name and Actions[action] then
+            Actions[action]()
+        end
+    end
+end))
+
+-- ============================================================
+-- 16. DỌN DẸP
+-- ============================================================
+_G.EggFull_Cleanup = function()
+    _G.EggFull_Running = false
+    StopFly() StopSpin() StopFarm() StopMob()
+    ManualNoclip = false
+    UpdateNoclip()
+    if noclipConn then noclipConn:Disconnect() noclipConn = nil end
+    for _, c in ipairs(Conns) do safeCall(function() c:Disconnect() end) end
+    ClearAllESP()
+    Misc.restoreLight()
+    safeCall(function() Workspace.CurrentCamera.CameraSubject = Humanoid end)
+    safeCall(function() Humanoid.WalkSpeed = OriginalWalkSpeed end)
+    safeCall(function() Humanoid.JumpPower = OriginalJumpPower end)
+    if Cfg.god then
+        safeCall(function()
+            Humanoid.MaxHealth = OriginalMaxHealth
+            Humanoid.Health = OriginalMaxHealth
+        end)
+    end
+    safeCall(function() ESPFolder:Destroy() end)
+    safeCall(function() ScreenGui:Destroy() end)
+    safeCall(function() NotifyGui:Destroy() end)
+    safeCall(function() sound:Destroy() end)
+end
+
+Notify("H-HUB v11.0", "Đã khởi động! F = Bay, G = Farm trứng, H = Farm quái, RightShift = Ẩn/Hiện menu.")
